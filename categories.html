@@ -1,0 +1,27 @@
+---
+layout: default
+title: Categories
+---
+
+<div class="home">
+
+  <h1 class="page-heading">Posts by Category</h1>
+
+  {% for category in site.categories %}
+  <h2>{{ category | first }}</h2>
+
+    {% for posts in category %}
+      {% for post in posts %}
+        {% if post.url %}
+          <li>
+            <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+            >>
+            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+
+  {% endfor %}
+
+</div>
