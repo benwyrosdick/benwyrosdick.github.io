@@ -4,12 +4,8 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+I am a Christian, husband of more than 10 years, and father of two. I am an entrepreneur and passionate software developer. Over the last decade my focus in software development has been around ruby and web applications.
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jglovier" %} /
-[jekyll-new](https://github.com/jglovier/jekyll-new)
+Most recently, my time as founder of Compose (formerly MongoHQ) has given me experience in building a distributed platform backed by several web applications and services written in ruby, node, and go. We took our original monolithic application and broke it up into smaller apps and services that allowed us to scale the platform in a way we were not able to with the single app.
 
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+I love building things and solving technical problems. My focus has been on gaining mastery in ruby, mostly because it has proved to be both enjoyable to work with and easier to inherit existing projects from other developers than other languages I have worked with. That being said I don’t treat it like Maslow’s Hammer and enjoy finding the right tools to solve each problem whether that be language, framework, or database.
