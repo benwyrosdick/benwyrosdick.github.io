@@ -20,3 +20,6 @@ yc_username:  benwyrosdick
 
 # Build settings
 markdown: kramdown
+
+gems:
+  - octopress-debugger

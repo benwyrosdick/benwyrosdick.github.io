@@ -10,16 +10,13 @@ title: Categories
   {% for category in site.categories %}
   <h2>{{ category | first }}</h2>
 
-    {% for posts in category %}
-      {% for post in posts %}
-        {% if post.url %}
-          <li>
-            <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-            >>
-            <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-          </li>
-        {% endif %}
-      {% endfor %}
+    {% assign posts = category | last %}
+    {% for post in posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        >>
+        <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+      </li>
     {% endfor %}
 
   {% endfor %}
