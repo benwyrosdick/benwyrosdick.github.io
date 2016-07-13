@@ -1,10 +1,24 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (5.0.0)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (~> 0.7)
+      minitest (~> 5.1)
+      tzinfo (~> 1.1)
+    bourbon (4.2.7)
+      sass (~> 3.4)
+      thor (~> 0.19)
     byebug (9.0.5)
     coderay (1.1.1)
     colorator (0.1)
+    concurrent-ruby (1.0.2)
     ffi (1.9.14)
+    gemoji (2.1.0)
+    html-pipeline (2.4.2)
+      activesupport (>= 2)
+      nokogiri (>= 1.4)
+    i18n (0.7.0)
     jekyll (3.1.6)
       colorator (~> 0.1)
       jekyll-sass-converter (~> 1.0)
@@ -14,10 +28,15 @@ GEM
       mercenary (~> 0.3.3)
       rouge (~> 1.7)
       safe_yaml (~> 1.0)
+    jekyll-paginate (1.1.0)
     jekyll-sass-converter (1.4.0)
       sass (~> 3.4)
     jekyll-watch (1.4.0)
       listen (~> 3.0, < 3.1)
+    jemoji (0.6.2)
+      gemoji (~> 2.0)
+      html-pipeline (~> 2.2)
+      jekyll (>= 3.0)
     kramdown (1.11.1)
     liquid (3.0.6)
     listen (3.0.8)
@@ -25,6 +44,11 @@ GEM
       rb-inotify (~> 0.9, >= 0.9.7)
     mercenary (0.3.6)
     method_source (0.8.2)
+    mini_portile2 (2.1.0)
+    minitest (5.9.0)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
     octopress (3.0.11)
       jekyll (>= 2.0)
       mercenary (~> 0.3.2)
@@ -42,6 +66,7 @@ GEM
       jekyll (~> 3.0)
     octopress-hooks (2.6.1)
       jekyll (>= 2.0)
+    pkg-config (1.1.7)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -57,12 +82,19 @@ GEM
     safe_yaml (1.0.4)
     sass (3.4.22)
     slop (3.6.0)
+    thor (0.19.1)
+    thread_safe (0.3.5)
     titlecase (0.1.1)
+    tzinfo (1.2.2)
+      thread_safe (~> 0.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  bourbon
+  jekyll-paginate
+  jemoji
   octopress (~> 3.0)
   octopress-debugger
 

@@ -1,25 +1,60 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
+# Build settings
+gems:
+  - jemoji
+  - jekyll-paginate
 
 # Site settings
-title: Ben Wyrosdick
-name: Ben Wyrosdick
+title: "Ben Wyrosdick"
+description: > # this means to ignore newlines until "email:"
+   A Jekyll theme - Medium inspired
+
 email: ben.wyrosdick@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  Personal blog and random musings
-baseurl: "" # the subpath of your site, e.g. /blog
+#blog logo
+logo: "/assets/images/bw_logo.png"
+# blog cover
+cover: "/assets/images/cA4aKEIPQrerBnp1yGHv_IMG_9534-3-2.jpg"
+
+name: 'Ben Wyrosdick'
+author: 'Ben Wyrosdick'
+author_image: "/assets/images/author.jpg"
+
+paginate:	5
+
 url: "http://wyrosdick.com"
-twitter_username: benwyrosdick
-github_username:  benwyrosdick
-keybase_username:  benwyrosdick
-yc_username:  benwyrosdick
+baseurl: ""
+#used to display twitter cards
+twitter_handle: '@benwyrosdick'
 
-# Build settings
-markdown: kramdown
+#fill in disqus shortname to use disqus
+#disqus: disqus-shortname
 
-gems:
-  - octopress-debugger
+# social icons and sharing options
+social:
+  - icon:	twitter
+    url:	https://twitter.com/benwyrosdick
+    desc: Follow me on twitter
+    share_url: http://twitter.com/share
+    share_title: ?text=
+    share_link: "&amp;url="
+
+#  - icon:	facebook
+#    url:	https://facebook.com/???
+#    desc: Connect with me facebook
+#    share_url: https://www.facebook.com/sharer.php
+#    share_title: ?t=
+#    share_link: "&amp;u="
+
+  - icon:	github
+    url:	https://github.com/benwyrosdick
+    desc:	Fork me on github
+    share_url:
+    share_title:
+    share_link:
+
+#  - icon:	google-plus
+#    url:	https://google.com/???
+#    desc:	Add me on google+
+#    share_url:
+#    share_title:
+#    share_link:
+
