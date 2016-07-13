@@ -6,7 +6,7 @@ gems:
 # Site settings
 title: "Ben Wyrosdick"
 description: > # this means to ignore newlines until "email:"
-   A Jekyll theme - Medium inspired
+   Personal & Techical Blog
 
 email: ben.wyrosdick@gmail.com
 #blog logo
