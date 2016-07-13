@@ -21,7 +21,7 @@ author_image: "/assets/images/author.jpg"
 paginate:	5
 
 url: "http://wyrosdick.com"
-baseurl: ""
+baseurl: "/"
 #used to display twitter cards
 twitter_handle: '@benwyrosdick'
 
