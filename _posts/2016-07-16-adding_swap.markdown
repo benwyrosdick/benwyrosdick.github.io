@@ -1,5 +1,6 @@
 ---
-title: Adding Swap to a Linux Sytem
+layout: post
+title: "Adding Swap to a Linux Sytem"
 date: 2016-07-16T15:24:54-05:00
 category: TIL
 tags: [linux]
