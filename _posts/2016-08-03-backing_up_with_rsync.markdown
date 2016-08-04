@@ -40,7 +40,7 @@ Now we have a file on disk and link to it named `file_a`. Let's create a second 
 $ ln file_a file_b
 {% endhighlight %}
 
-Now let's use the `stat` command to see some info about the files. We will see how many links a file has to it as well as the [inode](https://en.wikipedia.org/wiki/Inode) number which represents where thdisk is stored on disk.
+Now let's use the `stat` command to see some info about the files. We will see how many links a file has to it as well as the [inode](https://en.wikipedia.org/wiki/Inode) number which represents where the file is stored on disk.
 
 {% highlight shell %}
 $ stat file_a
@@ -83,13 +83,13 @@ So we see that any changes to a file get made to all the files since they all po
 Mechanics of incremental backup
 ===============================
 
-We will show how to use rsync in just a moment to accomplish the backups, but before we do lets look at how it works.
+I will show how to use rsync in just a moment to accomplish the backups, but before we do lets look at how it works.
 
 Our first backup, which will be our full backup, will be stored in a folder named with a timestamp. Each backup after that will also be stored in a folder with a timestamp of when the backup was run. After each run we will symlink a folder called `latest` to the most recent run.
 
 After the initial backup we want to make the new backup folder a tree of hard links to the previous backup and only unlink and change files that have changed. Rsync will handle this for us but to get an idea of how to accomplish that manually we can use `cp -al` to make a copy of the backup folder with links. The `-l` option makes hard links instead of copying the files. It doesn't make links of folders though. The `-a` option tells `cp` to take an archive which recurses through the tree and preserves file ownership and permissions.
 
-This means that when the backup runs in our newly linked folder we are only storing the differences in the new state and the previous state since using the links didn't take up any additional space ont he disk for the new folder. We are only adding files that are new or have changed.
+This means that when the backup runs in our newly linked folder we are only storing the differences in the new state and the previous state since using the links didn't take up any additional space on the disk for the new folder. We are only adding files that are new or have changed.
 
 Using Rsync to accomplish the backup
 ====================================
@@ -116,7 +116,7 @@ Now that we have a backup in place lets create our symlink to the latest copy.
 $ ln -sfn `ls -r bak | egrep '\d' | head -n 1` bak/latest
 {% endhighlight %}
 
-The previous command uses and interpolated command `ls -r bak | egrep '\d' | head -n 1` to find the last timestamped backup but doing an `ls` on the folder and sorting them in reverse order with `-r` then using `grep` to only find the folders with digits to match the timestamped folders then returning the first line using `head -n 1`. We use that folder found as the destination in the symlink. The options we use are important too. The `-s` creates a symbolic link and not a hard link to the folder. The `-fn` option combination forces `ln` to overwrite a previous link if it exists.
+The previous command uses and interpolated command `ls -r bak | egrep '\d' | head -n 1` to find the last timestamped backup by doing an `ls` on the folder and sorting them in reverse order with `-r` then using `grep` to only find the folders with digits to match the timestamped folders then returning the first line using `head -n 1`. We use that folder found as the destination in the symlink. The options we use here are important too. The `-s` creates a symbolic link and not a hard link to the folder. The `-fn` option combination forces `ln` to overwrite a previous link if it exists.
 
 Now our folder looks like this
 
@@ -142,7 +142,9 @@ sent 170 bytes  received 48 bytes  436.00 bytes/sec
 total size is 12  speedup is 0.06
 {% endhighlight %}
 
-We will update the symlink and examine the directory contents once more
+We notice two new options this time. The `--delete` option tells rsync to remove anything in the destination folder that does not exist in the source. We also see the `--link-dest` option that tells rsync to make a linked copy of that folder to write into. And once again we are making use of the interpolation to find the latest backup and timestamp the current backup.
+
+Now we will update the symlink and examine the directory contents once more
 
 {% highlight shell %}
 $ ln -sfn `ls -r bak | egrep '\d' | head -n 1` bak/latest
@@ -169,10 +171,10 @@ RSYNC=/usr/bin/rsync;
 SOURCE=/Users/ben/demo;
 DEST_ROOT=/Users/ben/bak;
 
-# ------------- run the backup -----------------------------------------
+# ------------- backup logic -------------------------------------------
 
 # run the backup
-$RSYNC -a --delete --link-dest=$DEST_ROOT/`ls -r $DEST_ROOT | egrep '\d' | head -n 1` $SOURCE/ $DEST_ROOT/`date +%F_%T`/
+$RSYNC -a --delete --link-dest=../`ls -r $DEST_ROOT | egrep '\d' | head -n 1` $SOURCE/ $DEST_ROOT/`date +%F_%T`/
 
 # symlink to latest
 $LN -sfn `ls -r $DEST_ROOT | egrep '\d' | head -n 1` $DEST_ROOT/latest
@@ -184,9 +186,27 @@ Be sure to make the file you just created executable
 $ chmod +x /usr/local/bin/run_backup.sh
 {% endhighlight %}
 
-Now you can add it to crontab with `crontab -e`
+Now you can add it to crontab with `crontab -e`. I will set it to run every day at midnight.
 
 {% highlight crontab %}
 # MIN HOUR DOM MON DOW CMD
 0 0 * * * /usr/local/bin/run_backup.sh >/dev/null 2>&1
+{% endhighlight %}
+
+Enhancements
+============
+
+This is just an example of how to setup the backups. In a real world scenario you would not run the backups to your local disk. You can easily backup to an attached or network drive as well as tell rsync to write to a remote server with `user@host:/path` syntax.
+
+{% highlight shell %}
+$ rsync -av demo/ ben@backup.benwyrosdick.com:~/bak/`date +%F_%T`/
+building file list ... done
+created directory /home/ben/bak/2016-08-03_23:45:43
+./
+file_a
+file_b
+file_c
+
+sent 270 bytes  received 92 bytes  241.33 bytes/sec
+total size is 12  speedup is 0.03
 {% endhighlight %}
