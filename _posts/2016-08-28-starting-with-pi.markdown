@@ -58,6 +58,10 @@ We will use this in all of our scripts that output to the LEDs.
 
 ### Bar Graph the Axes
 
+Using the gyroscope, magnetometer, and accelerometer together the SenseHat will get a reading for orientation. We will graph those values as a bar graph on the LED grid. We will convert the degrees of rotation in the x, y, and z axis to a number 0-8 for use in the graph bar. Each axis is converted such that it is 0 when flat and at 8 when rotated 90º on any axis.
+
+![](/assets/article_images/2016-08-28-getting-started-with-raspberry-pi/gyro.gif)
+
 {% highlight python %}
 import time
 import signal
@@ -71,6 +75,9 @@ def exit_gracefully(signal, frame):
   sys.exit(0)
 signal.signal(signal.SIGINT, exit_gracefully)
 
+GRAPH_BAR_HEIGHT = 8
+GRAPH_BAR_WIDTH = 2
+
 red = (255, 0, 0)
 green = (0, 255, 0)
 blue = (0, 0, 255)
@@ -79,29 +86,98 @@ black = (0, 0, 0)
 sense.set_rotation(270)
 sense.low_light = True
 
-def convert(deg):
+def normalize_deg(deg, bound):
   deg = int(deg)
   q = deg / 90
   r = deg % 90
   if (q % 2 == 1):
     r = 90 - r
-  return int(r * (8.0/90))
+  return int(r * (bound / 90.0))
 
 while True:
   orientation = sense.orientation
-  x = convert(orientation['pitch'])
-  y = convert(orientation['roll'])
-  z = convert(orientation['yaw'])
+  x = normalize_deg(orientation['pitch'], GRAPH_BAR_HEIGHT)
+  y = normalize_deg(orientation['roll'], GRAPH_BAR_HEIGHT)
+  z = normalize_deg(orientation['yaw'], GRAPH_BAR_HEIGHT)
 
   grid = []
 
-  grid += ([red] * x + [black] * (8-x)) * 2
-  grid += [black] * 8
-  grid += ([green] * y + [black] * (8-y)) * 2
-  grid += [black] * 8
-  grid += ([blue] * z + [black] * (8-z)) * 2
+  grid += ([red] * x + [black] * (GRAPH_BAR_HEIGHT - x)) * GRAPH_BAR_WIDTH
+  grid += [black] * GRAPH_BAR_HEIGHT
+  grid += ([green] * y + [black] * (GRAPH_BAR_HEIGHT - y)) * GRAPH_BAR_WIDTH
+  grid += [black] * GRAPH_BAR_HEIGHT
+  grid += ([blue] * z + [black] * (GRAPH_BAR_HEIGHT - z)) * GRAPH_BAR_WIDTH
 
   sense.set_pixels(grid)
 
-  time.sleep(0.2)
+  time.sleep(0.1)
+{% endhighlight %}
+
+### Binary Clock
+
+Reusing some of the code we did for graphing the orientation we will make a binary clock.
+
+![](/assets/article_images/2016-08-28-getting-started-with-raspberry-pi/clock.gif)
+
+{% highlight python %}
+import time
+import signal
+import sys
+
+import pytz
+from datetime import datetime
+from pytz import timezone
+
+from sense_hat import SenseHat
+sense = SenseHat()
+sense.set_rotation(270)
+sense.low_light = True
+
+def exit_gracefully(signal, frame):
+  sense.clear()
+  sys.exit(0)
+signal.signal(signal.SIGINT, exit_gracefully)
+
+GRAPH_BAR_HEIGHT = 8
+
+red = (255, 0, 0)
+green = (0, 255, 0)
+blue = (0, 0, 255)
+black = (0, 0, 0)
+
+central = timezone('US/Central')
+
+def digit_to_grid(digit, color):
+  digits = []
+  while digit > 0:
+    if digit % 2 == 1:
+      digits += [color]
+    else:
+      digits += [black]
+    digit /= 2
+  digits += [black] * (GRAPH_BAR_HEIGHT - len(digits))
+  return digits
+
+while True:
+  grid = []
+
+  local = datetime.now(timezone('UTC')).astimezone(central)
+
+  hour = int(local.strftime("%I"))
+  grid += digit_to_grid(hour / 10, red)
+  grid += digit_to_grid(hour % 10, red)
+
+  grid += [black] * GRAPH_BAR_HEIGHT
+  
+  grid += digit_to_grid(local.minute / 10, green)
+  grid += digit_to_grid(local.minute % 10, green)
+
+  grid += [black] * GRAPH_BAR_HEIGHT
+
+  grid += digit_to_grid(local.second / 10, blue)
+  grid += digit_to_grid(local.second % 10, blue)
+
+  sense.set_pixels(grid)
+
+  time.sleep(0.5)
 {% endhighlight %}
