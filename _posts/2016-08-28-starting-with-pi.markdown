@@ -117,7 +117,7 @@ while True:
 
 Reusing some of the code we did for graphing the orientation we will make a binary clock.
 
-![](/assets/article_images/2016-08-28-getting-started-with-raspberry-pi/clock.gif)
+<img src='/assets/article_images/2016-08-28-getting-started-with-raspberry-pi/clock.gif' style='width: 215px;' />
 
 {% highlight python %}
 import time
