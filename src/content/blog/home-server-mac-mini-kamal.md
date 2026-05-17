@@ -22,9 +22,9 @@ If I were buying hardware fresh I'd probably grab a small N100 mini PC, but the 
 A few Apple-specific things to know:
 
 - **Boot from USB**: hold Option at the chime to pick the USB installer.
-- **EFI is fine**, but the firmware doesn't always like every bootloader. I install [rEFInd](https://www.rodsbooks.com/refind/) on the EFI partition as a safety net so Apple's firmware always finds *something* to boot.
-- **Wi-Fi driver** for the Broadcom BCM4331 in the 2012 model is `broadcom-wl` from the AUR. Use Ethernet for the install itself.
-- **Fan control**: install `mbpfan` so it doesn't sit there roasting under load. Out of the box, Linux on Apple hardware will leave the fans at minimum even when the CPU is hot.
+- **EFI is fine**, but the firmware doesn't always like every bootloader. So you can install [rEFInd](https://www.rodsbooks.com/refind/) on the EFI partition as a safety net so Apple's firmware always finds *something* to boot.
+- **Wi-Fi driver** for the Broadcom BCM4331 in the 2012 model is `broadcom-wl` from the AUR. I used ethernet for the install itself and haven't bothered with Wi-Fi yet.
+- **Fan control**: install `mbpfan` so it doesn't sit there roasting under load. Out of the box, Linux on Apple hardware can leave the fans at minimum even when the CPU is hot.
 
 Past that, it's a normal Arch install — `archinstall`, set up a user, install `docker` and `docker-compose`, enable the Docker service, add my user to the `docker` group, done.
 
