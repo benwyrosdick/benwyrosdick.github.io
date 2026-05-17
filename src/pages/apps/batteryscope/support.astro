@@ -1,0 +1,96 @@
+---
+import AppPageLayout from '../../../layouts/AppPageLayout.astro';
+import { siteConfig } from '../../../site.config';
+---
+
+<AppPageLayout
+  appName="BatteryScope"
+  pageTitle="Support"
+  description="Support and contact information for the BatteryScope iOS app."
+>
+  <p>
+    BatteryScope is an iOS app for monitoring lithium batteries that expose a Bluetooth battery
+    management system (BMS) — Impulse Lithium, Renogy, LiTime, Eco-Worthy, and other batteries
+    that speak the JBD / Xiaoxiang BLE protocol.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Found a bug, have a question, or want to suggest a feature? Email
+    <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+    and I'll do my best to get back to you. For bug reports, please include:
+  </p>
+  <ul>
+    <li>Your iPhone or iPad model and iOS version</li>
+    <li>The BatteryScope version (Settings tab in the app)</li>
+    <li>The battery brand / model you were connecting to</li>
+    <li>A short description of what happened</li>
+  </ul>
+
+  <h2>Getting Started</h2>
+  <ol>
+    <li>Open BatteryScope on a physical iPhone or iPad running iOS 17 or later.</li>
+    <li>When prompted, allow Bluetooth access — the app uses it solely to read from BMS devices
+      you add.</li>
+    <li>Tap <strong>Scan</strong> and pick your battery from the list. Give it a friendly name and
+      an optional nominal capacity.</li>
+    <li>The battery now appears on your dashboard with live voltage, current, state of charge,
+      cycle count, and temperature.</li>
+    <li>To track multiple batteries together, create a group and choose <em>series</em> or
+      <em>parallel</em>.</li>
+  </ol>
+
+  <h2>Common Questions</h2>
+
+  <h3>Which batteries are supported?</h3>
+  <p>
+    Most batteries that speak the JBD / Xiaoxiang BLE protocol, which is used by a wide range of
+    consumer LiFePO4 brands. The de-facto BLE UUIDs are service <code>FF00</code>, notify
+    <code>FF01</code>, and write <code>FF02</code>. If your battery uses a different protocol
+    (Daly, Seplos, ANT), it may not work out of the box — please let me know what you have.
+  </p>
+
+  <h3>My battery doesn't appear in the scan list. What now?</h3>
+  <ul>
+    <li>Make sure the battery is awake — many BMS modules sleep when there's no load. Plug in a
+      load or a charger briefly.</li>
+    <li>Confirm the battery's Bluetooth radio is enabled (some have a physical switch or app
+      toggle from the manufacturer).</li>
+    <li>Make sure no other phone or app is already connected to it — JBD-style BMS modules only
+      allow one BLE connection at a time.</li>
+    <li>Check <strong>Settings → BatteryScope → Bluetooth</strong> and confirm Bluetooth is
+      allowed for the app.</li>
+    <li>Try toggling Bluetooth off and on in iOS Control Center, then re-open the app.</li>
+  </ul>
+
+  <h3>Readings look wrong or jumpy.</h3>
+  <p>
+    Some BMS modules report values that briefly spike during load transitions. If a value looks
+    persistently off (for example, current with the wrong sign), email me with the battery brand
+    / model and a screenshot.
+  </p>
+
+  <h3>Does BatteryScope work in the background?</h3>
+  <p>
+    No. iOS requires Bluetooth apps to be in the foreground to maintain a live connection in this
+    app. When you switch away or lock the screen, the connection drops and resumes when you
+    return.
+  </p>
+
+  <h3>Does the app work without an internet connection?</h3>
+  <p>Yes. BatteryScope makes no network requests of any kind — all communication is local over
+    Bluetooth Low Energy with the batteries you choose to monitor.</p>
+
+  <h3>How do I remove a battery or group?</h3>
+  <p>
+    Swipe left on the entry on the dashboard, or open the entry and use the Delete action.
+    Removing the app from your device deletes all locally stored battery and group records.
+  </p>
+
+  <h2>Privacy</h2>
+  <p>
+    BatteryScope collects no personal data, makes no network requests, and contains no analytics
+    or tracking. See the
+    <a href="/apps/batteryscope/privacy/">privacy policy</a> for full details.
+  </p>
+</AppPageLayout>

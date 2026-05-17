@@ -1,0 +1,109 @@
+---
+import AppPageLayout from '../../../layouts/AppPageLayout.astro';
+import { siteConfig } from '../../../site.config';
+
+const effectiveDate = 'May 10, 2026';
+---
+
+<AppPageLayout
+  appName="BatteryScope"
+  pageTitle="Privacy Policy"
+  description="Privacy policy for the BatteryScope iOS app."
+>
+  <p class="muted"><strong>Effective date:</strong> {effectiveDate}</p>
+
+  <p>
+    This privacy policy applies to the BatteryScope iOS app ("the App"), developed and distributed
+    by Ben Wyrosdick ("we," "us," or "our"). This policy explains what data the App handles and
+    how.
+  </p>
+
+  <h2>Summary</h2>
+  <p>
+    <strong>
+      BatteryScope does not collect, transmit, store on remote servers, or share any personal data.
+    </strong>
+    Everything the App reads stays on your iPhone or iPad. No account is required. No analytics,
+    telemetry, advertising identifiers, or tracking of any kind are used.
+  </p>
+
+  <h2>What data the App handles</h2>
+  <p>
+    The App stores the following on your device, and only on your device, in iOS's standard local
+    app storage (SwiftData / file system / UserDefaults):
+  </p>
+  <ul>
+    <li>
+      <strong>Battery records you save</strong>: a display name you choose, the Bluetooth
+      peripheral identifier reported by iOS (a per-device UUID), and an optional nominal capacity
+      figure.
+    </li>
+    <li>
+      <strong>Group records you create</strong>: a display name, a configuration (series or
+      parallel), and references to the batteries you placed in the group.
+    </li>
+    <li>
+      <strong>App preferences</strong>: settings such as whether developer tools are enabled.
+    </li>
+  </ul>
+  <p>
+    Live readings from your battery management systems (voltage, current, state of charge, cell
+    voltages, temperatures, cycle count, manufacturer info, etc.) are read over Bluetooth Low
+    Energy in real time. They are <strong>displayed but not persisted</strong>, with the exception
+    of an in-memory debug log that exists only while the App is running.
+  </p>
+
+  <h2>Bluetooth</h2>
+  <p>
+    The App uses Bluetooth Low Energy solely to communicate with battery management systems (BMS)
+    on lithium batteries that you choose to monitor. iOS will prompt you to grant Bluetooth
+    permission the first time the App starts; you can revoke this permission at any time in
+    <strong>Settings → BatteryScope → Bluetooth</strong>.
+  </p>
+  <p>
+    The App does not advertise itself, does not act as a peripheral, and does not transmit data
+    over Bluetooth to anything other than the BMS devices you have explicitly added.
+  </p>
+
+  <h2>Third parties</h2>
+  <p>
+    The App makes no network requests. It does not communicate with any server operated by us or
+    by any third party. There are no third-party SDKs, advertising networks, analytics services,
+    crash reporters, or telemetry systems integrated into the App.
+  </p>
+  <p>
+    If a future version introduces any such integration, this privacy policy will be updated and
+    you will be notified through the App Store update notes before that version is released.
+  </p>
+
+  <h2>Data sharing</h2>
+  <p>
+    Because the App does not collect personal data, there is nothing to share. We do not sell,
+    rent, lease, or otherwise transfer any user information, because we do not receive any.
+  </p>
+
+  <h2>Children's privacy</h2>
+  <p>
+    The App is not directed to children under 13 and does not knowingly collect any information
+    from anyone, including children.
+  </p>
+
+  <h2>Your control over data</h2>
+  <p>
+    All data stored by the App lives on your device. To remove it, delete the App or remove
+    individual entries from within the App. Deleting the App from your device removes all
+    associated local storage.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    If this policy changes, an updated version will replace this page and the effective date at
+    the top will be updated. Material changes will be noted in the App's release notes.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions about this policy can be sent to
+    <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
+  </p>
+</AppPageLayout>
