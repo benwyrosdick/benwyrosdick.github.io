@@ -1,0 +1,53 @@
+---
+import AppPageLayout from '../../../layouts/AppPageLayout.astro';
+import { siteConfig } from '../../../site.config';
+---
+
+<AppPageLayout
+  appName="Imposter"
+  pageTitle="Support"
+  description="Support and contact information for the Imposter iOS game."
+>
+  <p>
+    Imposter is a pass-and-play party game for iPhone and iPad. Gather a group, pick a number of
+    imposters, and try to figure out who doesn't know the secret word.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Need help, have a question, or want to suggest a feature? Email
+    <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+    and I'll do my best to get back to you.
+  </p>
+
+  <h2>How to Play</h2>
+  <ol>
+    <li>Enter the names of everyone playing (3 or more works best).</li>
+    <li>Choose how many imposters there should be.</li>
+    <li>Pass the device around. Each player taps their name and long-presses to reveal whether they
+      are an imposter and, if not, the secret word. Release to hide it again.</li>
+    <li>Once everyone has seen their role, the app picks a random player to start. Discuss, ask
+      questions, and try to spot the imposters.</li>
+    <li>When you're ready, reveal the imposters and start a new round.</li>
+  </ol>
+
+  <h2>Common Questions</h2>
+
+  <h3>Does Imposter work without an internet connection?</h3>
+  <p>Yes. The app is fully offline and does not require a network connection.</p>
+
+  <h3>Are my player names or game data saved?</h3>
+  <p>
+    No. Names and settings stay in memory only during the current session and are discarded when
+    you close the app or start a new game.
+  </p>
+
+  <h3>Which devices are supported?</h3>
+  <p>Imposter runs on iPhone and iPad with iOS 17 or later.</p>
+
+  <h3>How do I report a bug?</h3>
+  <p>
+    Send an email to <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> with a short
+    description of what happened, the device you're using, and the iOS version if you know it.
+  </p>
+</AppPageLayout>

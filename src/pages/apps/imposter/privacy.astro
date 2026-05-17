@@ -1,0 +1,56 @@
+---
+import AppPageLayout from '../../../layouts/AppPageLayout.astro';
+import { siteConfig } from '../../../site.config';
+
+const lastUpdated = 'May 17, 2026';
+---
+
+<AppPageLayout
+  appName="Imposter"
+  pageTitle="Privacy Policy"
+  description="Privacy policy for the Imposter iOS game."
+>
+  <p class="muted">Last updated: {lastUpdated}</p>
+
+  <p>
+    Imposter is a pass-and-play party game that runs entirely on your device. This privacy policy
+    explains what information the app does and does not collect.
+  </p>
+
+  <h2>Information We Collect</h2>
+  <p>
+    <strong>None.</strong> Imposter does not collect, store, or transmit any personal information.
+    The app has no user accounts, no servers, and makes no network requests.
+  </p>
+
+  <h2>Information You Enter</h2>
+  <p>
+    Player names and game settings you enter during play exist only in memory on your device
+    for the duration of the game. They are not saved, synced, shared, or sent anywhere, and they
+    are discarded when you close the app or start a new game.
+  </p>
+
+  <h2>Analytics and Tracking</h2>
+  <p>
+    Imposter contains no analytics, no advertising, no third-party SDKs, and no tracking of any
+    kind.
+  </p>
+
+  <h2>Children's Privacy</h2>
+  <p>
+    Because Imposter does not collect any information, it does not knowingly collect information
+    from children under 13. The app is safe for use by players of any age.
+  </p>
+
+  <h2>Changes to This Policy</h2>
+  <p>
+    If this policy changes, the updated version will be posted on this page with a new
+    "Last updated" date.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions about this privacy policy can be sent to
+    <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
+  </p>
+</AppPageLayout>
