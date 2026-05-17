@@ -1,0 +1,564 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import appIcon from '../../../assets/batteryscope/app-icon.png';
+import dashboard from '../../../assets/batteryscope/dashboard.png';
+import group from '../../../assets/batteryscope/group.png';
+import batteryDischarging from '../../../assets/batteryscope/battery-discharging.png';
+import batteryCharging from '../../../assets/batteryscope/battery-charging.png';
+import settings from '../../../assets/batteryscope/settings.png';
+
+const tagline = 'Live stats from your Bluetooth lithium batteries — right on your phone.';
+---
+
+<BaseLayout
+  title="BatteryScope – Bluetooth BMS monitor for iPhone & iPad"
+  description={tagline}
+>
+  <section class="bs-hero">
+    <div class="bs-hero-bg" aria-hidden="true"></div>
+    <div class="bs-hero-inner">
+      <div class="bs-hero-copy">
+        <Image src={appIcon} alt="BatteryScope app icon" class="bs-app-icon" widths={[120, 240]} sizes="120px" />
+        <h1>BatteryScope</h1>
+        <p class="bs-tagline">{tagline}</p>
+        <p class="bs-sub">
+          Connect to JBD / Xiaoxiang-protocol BMS modules used by Impulse, Renogy, LiTime,
+          Eco-Worthy, and other consumer LiFePO4 brands. Watch voltage, current, state of charge,
+          temperature, and cell balance in real time. Group batteries in series or parallel for
+          aggregate stats.
+        </p>
+        <div class="bs-cta-row">
+          <a class="bs-cta" href="mailto:ben.wyrosdick@gmail.com?subject=BatteryScope%20TestFlight">
+            Join the TestFlight beta
+          </a>
+          <span class="bs-cta-note">Coming soon to the App Store</span>
+        </div>
+        <div class="bs-meta">
+          <span>iPhone &amp; iPad</span>
+          <span>·</span>
+          <span>iOS 17+</span>
+          <span>·</span>
+          <span>100% local — no accounts, no cloud, no tracking</span>
+        </div>
+        <div class="bs-links">
+          <a href="/apps/batteryscope/privacy/">Privacy Policy</a>
+          <span>·</span>
+          <a href="/apps/batteryscope/support/">Support</a>
+        </div>
+      </div>
+      <div class="bs-hero-image">
+        <Image
+          src={dashboard}
+          alt="BatteryScope dashboard with grouped batteries"
+          widths={[280, 560, 840]}
+          sizes="(min-width: 900px) 320px, 70vw"
+          class="bs-phone"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="bs-section">
+    <h2 class="bs-section-title">What you see</h2>
+    <p class="bs-section-lead">
+      A glance tells you the state of every battery on your boat, RV, off-grid setup, or shop.
+      Dig deeper for per-cell voltages, temperature sensors, cycle count, and time-to-empty.
+    </p>
+    <ol class="bs-steps">
+      <li>
+        <div class="bs-step-text">
+          <span class="bs-step-num">01</span>
+          <h3>Dashboard at a glance</h3>
+          <p>
+            Every saved battery and group on one screen, with state of charge, voltage, and a
+            quick charging/discharging indicator. Tap any row for full live stats.
+          </p>
+        </div>
+        <div class="bs-step-image">
+          <Image
+            src={dashboard}
+            alt="Dashboard with groups and individual batteries"
+            widths={[240, 480]}
+            sizes="(min-width: 720px) 260px, 60vw"
+            class="bs-phone-sm"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="bs-step-text">
+          <span class="bs-step-num">02</span>
+          <h3>Group batteries in series or parallel</h3>
+          <p>
+            Wire two 12V batteries in parallel and BatteryScope reports the combined capacity and
+            current. Series for higher voltage banks. Aggregate stats roll up automatically.
+          </p>
+        </div>
+        <div class="bs-step-image">
+          <Image
+            src={group}
+            alt="House Bank group showing aggregated stats and members"
+            widths={[240, 480]}
+            sizes="(min-width: 720px) 260px, 60vw"
+            class="bs-phone-sm"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="bs-step-text">
+          <span class="bs-step-num">03</span>
+          <h3>Per-battery live stats</h3>
+          <p>
+            Voltage, current, power, cycle count, temperature, capacity remaining, and a
+            time-to-empty (or time-to-full when charging) computed from the current draw.
+          </p>
+        </div>
+        <div class="bs-step-image">
+          <Image
+            src={batteryDischarging}
+            alt="Battery detail screen while discharging"
+            widths={[240, 480]}
+            sizes="(min-width: 720px) 260px, 60vw"
+            class="bs-phone-sm"
+          />
+          <Image
+            src={batteryCharging}
+            alt="Battery detail screen while charging"
+            widths={[240, 480]}
+            sizes="(min-width: 720px) 260px, 60vw"
+            class="bs-phone-sm bs-phone-overlap"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="bs-step-text">
+          <span class="bs-step-num">04</span>
+          <h3>Tune the polling rate</h3>
+          <p>
+            Pick how often BatteryScope reads from the BMS. Tighter intervals mean fresher
+            numbers; longer intervals save phone battery and BLE bandwidth. Toggle cell-voltage
+            polling for another big drop in traffic.
+          </p>
+        </div>
+        <div class="bs-step-image">
+          <Image
+            src={settings}
+            alt="Settings screen with polling controls"
+            widths={[240, 480]}
+            sizes="(min-width: 720px) 260px, 60vw"
+            class="bs-phone-sm"
+          />
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="bs-section bs-features">
+    <h2 class="bs-section-title">Built for the job</h2>
+    <ul class="bs-feature-grid">
+      <li>
+        <h3>Works with what you have</h3>
+        <p>JBD / Xiaoxiang BLE protocol (service <code>FF00</code>) — used by Impulse, Renogy,
+          LiTime, Eco-Worthy, and most consumer LiFePO4 batteries.</p>
+      </li>
+      <li>
+        <h3>Per-cell visibility</h3>
+        <p>See min / max / average cell voltage and balance delta, so you can catch a weak cell
+          before it costs you a battery.</p>
+      </li>
+      <li>
+        <h3>Multi-temperature sensors</h3>
+        <p>BMS modules with two or more thermistors all report side by side. Watch for hot spots
+          under heavy load.</p>
+      </li>
+      <li>
+        <h3>Time-to-empty &amp; time-to-full</h3>
+        <p>Estimates computed from real current draw and remaining capacity. Updates as your load
+          changes.</p>
+      </li>
+      <li>
+        <h3>100% local</h3>
+        <p>No accounts, no cloud, no analytics. The app makes zero network requests — all data
+          stays between your phone and your batteries.</p>
+      </li>
+      <li>
+        <h3>Built-in debug tools</h3>
+        <p>Turn on the optional Debug tab to inspect raw BLE frames. Helpful when troubleshooting
+          a BMS that isn't responding.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="bs-section bs-final">
+    <h2 class="bs-section-title">Get notified at launch</h2>
+    <p>
+      BatteryScope is heading into TestFlight. Email
+      <a href="mailto:ben.wyrosdick@gmail.com?subject=BatteryScope%20TestFlight">
+        ben.wyrosdick@gmail.com
+      </a>
+      to join the beta — please mention the battery brand and model you'd like to monitor.
+    </p>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  $bs-bg-1: #0a1422;
+  $bs-bg-2: #102036;
+  $bs-card: rgba(255, 255, 255, 0.04);
+  $bs-card-border: rgba(255, 255, 255, 0.07);
+  $bs-accent: #2dd47a;
+  $bs-accent-dark: #1ea863;
+  $bs-text: #e7eef5;
+  $bs-muted: #8fa0b6;
+
+  :global(body) {
+    background: $bs-bg-1;
+  }
+
+  .bs-hero {
+    position: relative;
+    overflow: hidden;
+    color: $bs-text;
+    padding: 96px 24px 80px;
+
+    @media (max-width: 720px) {
+      padding: 80px 20px 56px;
+    }
+  }
+
+  .bs-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(45, 212, 122, 0.18), transparent 55%),
+      radial-gradient(circle at 90% 100%, rgba(40, 90, 180, 0.35), transparent 60%),
+      linear-gradient(170deg, $bs-bg-1, $bs-bg-2 70%);
+    z-index: 0;
+  }
+
+  .bs-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 48px;
+    align-items: center;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+
+  .bs-app-icon {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    margin-bottom: 28px;
+  }
+
+  .bs-hero-copy {
+    h1 {
+      margin: 0 0 16px;
+      font-size: 60px;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .bs-tagline {
+      margin: 0 0 18px;
+      font-size: 22px;
+      line-height: 1.35;
+      color: $bs-text;
+      font-weight: 500;
+    }
+
+    .bs-sub {
+      margin: 0 0 32px;
+      font-size: 17px;
+      line-height: 1.55;
+      color: $bs-muted;
+      max-width: 32em;
+    }
+
+    @media (max-width: 900px) {
+      .bs-sub { margin-left: auto; margin-right: auto; }
+    }
+  }
+
+  .bs-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+
+    @media (max-width: 900px) { justify-content: center; }
+  }
+
+  .bs-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, $bs-accent, $bs-accent-dark);
+    color: #06210f;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    box-shadow: 0 10px 24px rgba(30, 168, 99, 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(30, 168, 99, 0.55);
+    }
+  }
+
+  .bs-cta-note {
+    color: $bs-muted;
+    font-size: 14px;
+  }
+
+  .bs-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: $bs-muted;
+    font-size: 14px;
+    margin-bottom: 22px;
+
+    @media (max-width: 900px) { justify-content: center; }
+  }
+
+  .bs-links {
+    display: flex;
+    gap: 10px;
+    color: $bs-muted;
+    font-size: 14px;
+
+    a {
+      color: $bs-text;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+      &:hover { border-bottom-color: $bs-accent; }
+    }
+
+    @media (max-width: 900px) { justify-content: center; }
+  }
+
+  .bs-hero-image {
+    display: flex;
+    justify-content: center;
+  }
+
+  .bs-phone {
+    width: min(340px, 80vw);
+    height: auto;
+    border-radius: 38px;
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .bs-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    color: $bs-text;
+
+    @media (max-width: 720px) { padding: 64px 20px; }
+  }
+
+  .bs-section-title {
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 0 0 16px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .bs-section-lead {
+    text-align: center;
+    color: $bs-muted;
+    font-size: 17px;
+    line-height: 1.55;
+    max-width: 36em;
+    margin: 0 auto 56px;
+  }
+
+  .bs-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+
+    li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: center;
+
+      @media (max-width: 720px) {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        text-align: center;
+      }
+    }
+
+    li:nth-child(even) {
+      .bs-step-image { order: -1; }
+      @media (max-width: 720px) {
+        .bs-step-image { order: 0; }
+      }
+    }
+  }
+
+  .bs-step-num {
+    display: inline-block;
+    color: $bs-accent;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+  }
+
+  .bs-step-text {
+    h3 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      line-height: 1.2;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.55;
+      color: $bs-muted;
+      max-width: 28em;
+    }
+
+    @media (max-width: 720px) {
+      p { margin-left: auto; margin-right: auto; }
+    }
+  }
+
+  .bs-step-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    min-height: 480px;
+
+    @media (max-width: 720px) { min-height: 0; }
+  }
+
+  .bs-phone-sm {
+    width: min(260px, 60vw);
+    height: auto;
+    border-radius: 32px;
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  .bs-phone-overlap {
+    position: absolute;
+    left: 55%;
+    top: 40px;
+    transform: rotate(4deg);
+
+    @media (max-width: 720px) {
+      position: static;
+      transform: none;
+      margin-top: 20px;
+    }
+  }
+
+  .bs-features {
+    border-top: 1px solid $bs-card-border;
+    border-bottom: 1px solid $bs-card-border;
+  }
+
+  .bs-feature-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+
+    @media (max-width: 900px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media (max-width: 560px) {
+      grid-template-columns: 1fr;
+    }
+
+    li {
+      background: $bs-card;
+      border: 1px solid $bs-card-border;
+      border-radius: 18px;
+      padding: 26px 24px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.55;
+      color: $bs-muted;
+    }
+
+    code {
+      background: rgba(45, 212, 122, 0.12);
+      color: $bs-accent;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 13px;
+      border: 0;
+    }
+  }
+
+  .bs-final {
+    text-align: center;
+
+    p {
+      margin: 0 auto;
+      max-width: 36em;
+      font-size: 17px;
+      line-height: 1.55;
+      color: $bs-muted;
+    }
+
+    a {
+      color: $bs-accent;
+      text-decoration: underline;
+    }
+  }
+
+  :global(.site-footer) {
+    color: rgba(255, 255, 255, 0.5);
+    a { color: rgba(255, 255, 255, 0.75); }
+    a:hover { color: #fff; }
+  }
+</style>
