@@ -1,0 +1,88 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { siteConfig } from '../../site.config';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  );
+  // Page 1 is served by /, so skip it here.
+  return paginate(posts, { pageSize: siteConfig.paginate }).filter(
+    (entry) => entry.params.page !== '1' && entry.params.page !== 1,
+  );
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+
+function excerpt(body: string, words = 50): string {
+  const stripped = body
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/[#>*`_\-\[\]\(\)!]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  const split = stripped.split(' ').slice(0, words).join(' ');
+  return split + (stripped.split(' ').length > words ? '…' : '');
+}
+
+function longDate(d: Date): string {
+  return d.toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+const prevHref = page.currentPage > 2 ? `/page/${page.currentPage - 1}/` : '/';
+---
+
+<BaseLayout>
+  <header class="blog-header">
+    <a class="blog-logo" href={siteConfig.url} style={`background-image: url('${siteConfig.authorImage}')`}>
+      {siteConfig.title}
+    </a>
+    <h1 class="blog-title">{siteConfig.title}</h1>
+    <h2 class="blog-description">{siteConfig.description}</h2>
+    <div class="custom-links">
+      {siteConfig.social.map((s) => (
+        <>
+          <a class={`icon-${s.icon}`} href={s.url} title={s.desc}>
+            <i class={`fa fa-${s.icon}`}></i>
+          </a>
+          &nbsp;&nbsp;·&nbsp;&nbsp;
+        </>
+      ))}
+      <a href="/about/">About</a>
+    </div>
+  </header>
+
+  <main class="content" role="main">
+    <div class="cf frame">
+      {page.data.map((post) => (
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+          <div class="article-item">
+            <header class="post-header">
+              <h2 class="post-title" itemprop="name">
+                <a href={`/posts/${post.id}/`} itemprop="url">{post.data.title}</a>
+              </h2>
+            </header>
+            <section class="post-excerpt" itemprop="description">
+              <p>{excerpt(post.body ?? '')}</p>
+            </section>
+            <div class="post-meta">
+              <time datetime={post.data.date.toISOString()}>{longDate(post.data.date)}</time>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <nav class="pagination" role="navigation">
+      {page.url.next && <a class="newer-posts" href={`/page/${page.currentPage + 1}/`}>&larr; Older posts</a>}
+      <span class="page-number">Page {page.currentPage} of {page.lastPage}</span>
+      {page.url.prev && <a class="older-posts" href={prevHref}>Newer posts &rarr;</a>}
+    </nav>
+  </main>
+</BaseLayout>

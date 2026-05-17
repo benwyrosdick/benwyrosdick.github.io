@@ -1,0 +1,31 @@
+---
+import Head from '../components/Head.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Scripts from '../components/Scripts.astro';
+import '../styles/main.scss';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  publishedDate?: Date;
+}
+
+const { title, description, image, publishedDate } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <Head title={title} description={description} image={image} publishedDate={publishedDate} />
+  <body>
+    <Header />
+    <div class="page-content">
+      <div class="wrapper">
+        <slot />
+      </div>
+    </div>
+    <Footer />
+    <Scripts />
+  </body>
+</html>

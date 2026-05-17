@@ -1,0 +1,82 @@
+---
+import Head from '../components/Head.astro';
+import Header from '../components/Header.astro';
+import Scripts from '../components/Scripts.astro';
+import { siteConfig } from '../site.config';
+import '../styles/main.scss';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  author?: string;
+}
+
+const { title, description, image, author } = Astro.props;
+const displayAuthor = author ?? siteConfig.author;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <Head title={title} description={description} image={image} />
+  <body itemscope itemtype="http://schema.org/Article">
+    <Header />
+    <main class="content" role="main">
+      <article class="post">
+        {image ? (
+          <div class="article-image">
+            <div class="post-image-image" style={`background-image: url(${image})`}>
+              Article Image
+            </div>
+            <div class="post-meta">
+              <h1 class="post-title">{title}</h1>
+              <div class="cf post-meta-text">
+                <div class="author-image" style={`background-image: url(${siteConfig.authorImage})`}>
+                  Blog Logo
+                </div>
+                <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                  {displayAuthor}
+                </h4>
+              </div>
+              <div style="text-align:center">
+                <a href="#topofpage" class="topofpage"><i class="fa fa-angle-down"></i></a>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div class="noarticleimage">
+            <div class="post-meta">
+              <h1 class="post-title">{title}</h1>
+              <div class="cf post-meta-text">
+                <div class="author-image" style={`background-image: url(${siteConfig.authorImage})`}>
+                  Blog Logo
+                </div>
+                <h4 class="author-name" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                  {displayAuthor}
+                </h4>
+              </div>
+            </div>
+            <br /><br /><br />
+          </div>
+        )}
+        <section class="post-content">
+          <a name="topofpage"></a>
+          <slot />
+        </section>
+      </article>
+    </main>
+
+    <div class="bottom-closer">
+      <div class="background-closer-image" style={`background-image: url(${siteConfig.cover})`}>
+        Image
+      </div>
+      <div class="inner">
+        <h1 class="blog-title">{siteConfig.title}</h1>
+        <h2 class="blog-description">{siteConfig.description}</h2>
+        <a href="/" class="btn">Back to Overview</a>
+      </div>
+    </div>
+
+    <Scripts />
+  </body>
+</html>
