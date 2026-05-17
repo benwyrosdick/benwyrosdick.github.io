@@ -1,0 +1,552 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import appIcon from '../../../assets/imposter/app-icon.png';
+import setup from '../../../assets/imposter/setup.png';
+import revealLocked from '../../../assets/imposter/reveal-locked.png';
+import revealSecret from '../../../assets/imposter/reveal-secret.png';
+import round from '../../../assets/imposter/round.png';
+import results from '../../../assets/imposter/results.png';
+
+const tagline = 'The pass-and-play party game where one of you is faking it.';
+---
+
+<BaseLayout
+  title="Imposter – Pass-and-play party game for iPhone & iPad"
+  description={tagline}
+>
+  <section class="im-hero">
+    <div class="im-hero-bg" aria-hidden="true"></div>
+    <div class="im-hero-inner">
+      <div class="im-hero-copy">
+        <Image src={appIcon} alt="Imposter app icon" class="im-app-icon" widths={[120, 240]} sizes="120px" />
+        <h1>Imposter</h1>
+        <p class="im-tagline">{tagline}</p>
+        <p class="im-sub">
+          Pass your phone around the table. Everyone sees a secret word — except the imposters.
+          Talk it out. Guess who's faking. Play again.
+        </p>
+        <div class="im-cta-row">
+          <a class="im-cta" href="mailto:ben.wyrosdick@gmail.com?subject=Imposter%20TestFlight">
+            Join the TestFlight beta
+          </a>
+          <span class="im-cta-note">Coming soon to the App Store</span>
+        </div>
+        <div class="im-meta">
+          <span>iPhone &amp; iPad</span>
+          <span>·</span>
+          <span>iOS 17+</span>
+          <span>·</span>
+          <span>No ads, no accounts, no tracking</span>
+        </div>
+        <div class="im-links">
+          <a href="/apps/imposter/privacy/">Privacy Policy</a>
+          <span>·</span>
+          <a href="/apps/imposter/support/">Support</a>
+        </div>
+      </div>
+      <div class="im-hero-image">
+        <Image
+          src={setup}
+          alt="Imposter setup screen with player names and number of imposters"
+          widths={[280, 560, 840]}
+          sizes="(min-width: 900px) 320px, 70vw"
+          class="im-phone"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="im-section">
+    <h2 class="im-section-title">How it works</h2>
+    <ol class="im-steps">
+      <li>
+        <div class="im-step-text">
+          <span class="im-step-num">1</span>
+          <h3>Set up the round</h3>
+          <p>
+            Enter the names of everyone playing and pick how many imposters there should be.
+            Your roster sticks around for next time.
+          </p>
+        </div>
+        <div class="im-step-image">
+          <Image
+            src={setup}
+            alt="Setup screen"
+            widths={[240, 480]}
+            sizes="(min-width: 720px) 240px, 60vw"
+            class="im-phone-sm"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="im-step-text">
+          <span class="im-step-num">2</span>
+          <h3>Pass &amp; long-press to reveal</h3>
+          <p>
+            Each player taps their name, then long-presses to peek. Most players see the secret
+            word — but the imposters see nothing.
+          </p>
+        </div>
+        <div class="im-step-image">
+          <Image
+            src={revealLocked}
+            alt="Hold to reveal screen"
+            widths={[240, 480]}
+            sizes="(min-width: 720px) 240px, 60vw"
+            class="im-phone-sm"
+          />
+          <Image
+            src={revealSecret}
+            alt="Secret word revealed"
+            widths={[240, 480]}
+            sizes="(min-width: 720px) 240px, 60vw"
+            class="im-phone-sm im-phone-overlap"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="im-step-text">
+          <span class="im-step-num">3</span>
+          <h3>Discuss the round</h3>
+          <p>
+            The app picks a random first speaker. Ask questions, drop hints, bluff. When you're
+            ready to vote, tap to end the round.
+          </p>
+        </div>
+        <div class="im-step-image">
+          <Image
+            src={round}
+            alt="Round screen showing the first speaker"
+            widths={[240, 480]}
+            sizes="(min-width: 720px) 240px, 60vw"
+            class="im-phone-sm"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="im-step-text">
+          <span class="im-step-num">4</span>
+          <h3>Reveal the imposters</h3>
+          <p>
+            Lock in your guesses, then reveal who was faking. Play another round with the same
+            crew or jump back to settings.
+          </p>
+        </div>
+        <div class="im-step-image">
+          <Image
+            src={results}
+            alt="Results screen showing the imposters"
+            widths={[240, 480]}
+            sizes="(min-width: 720px) 240px, 60vw"
+            class="im-phone-sm"
+          />
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="im-section im-features">
+    <h2 class="im-section-title">Built for the table</h2>
+    <ul class="im-feature-grid">
+      <li>
+        <h3>One phone, any size group</h3>
+        <p>Works with 3 players or a packed dining room. Pass it around — that's the whole setup.</p>
+      </li>
+      <li>
+        <h3>Hold-to-reveal secrets</h3>
+        <p>Your role only shows while you press. Lift your finger and it's gone — no peeking over shoulders.</p>
+      </li>
+      <li>
+        <h3>Multiple imposters</h3>
+        <p>Bump the imposter count up for bigger groups or harder rounds.</p>
+      </li>
+      <li>
+        <h3>Hundreds of words</h3>
+        <p>A built-in word list keeps every round fresh. No setup, no themes to pick.</p>
+      </li>
+      <li>
+        <h3>Truly offline</h3>
+        <p>No accounts, no internet, no analytics. The app makes zero network requests, ever.</p>
+      </li>
+      <li>
+        <h3>Plays nice on iPad</h3>
+        <p>Same game, bigger screen — great for kids' parties and game nights.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="im-section im-final">
+    <h2 class="im-section-title">Get notified at launch</h2>
+    <p>
+      Imposter is heading to TestFlight while it bakes. Email
+      <a href="mailto:ben.wyrosdick@gmail.com?subject=Imposter%20TestFlight">
+        ben.wyrosdick@gmail.com
+      </a>
+      to join the beta or get a heads-up when it hits the App Store.
+    </p>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  $im-bg-1: #0a1130;
+  $im-bg-2: #181a4a;
+  $im-accent: #b07cf6;
+  $im-accent-dark: #8a5cd6;
+  $im-text: #ecedf6;
+  $im-muted: #9aa1c4;
+  $im-card-border: rgba(255, 255, 255, 0.08);
+
+  :global(body) {
+    background: $im-bg-1;
+  }
+
+  .im-hero {
+    position: relative;
+    overflow: hidden;
+    color: $im-text;
+    padding: 96px 24px 80px;
+
+    @media (max-width: 720px) {
+      padding: 80px 20px 56px;
+    }
+  }
+
+  .im-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(176, 124, 246, 0.35), transparent 55%),
+      radial-gradient(circle at 90% 100%, rgba(83, 110, 220, 0.4), transparent 60%),
+      linear-gradient(160deg, $im-bg-1, $im-bg-2 70%);
+    z-index: 0;
+  }
+
+  .im-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 48px;
+    align-items: center;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+
+  .im-app-icon {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    margin-bottom: 28px;
+  }
+
+  .im-hero-copy {
+    h1 {
+      margin: 0 0 16px;
+      font-size: 64px;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .im-tagline {
+      margin: 0 0 18px;
+      font-size: 22px;
+      line-height: 1.35;
+      color: $im-text;
+      font-weight: 500;
+    }
+
+    .im-sub {
+      margin: 0 0 32px;
+      font-size: 17px;
+      line-height: 1.55;
+      color: $im-muted;
+      max-width: 30em;
+    }
+
+    @media (max-width: 900px) {
+      .im-sub {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+  .im-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+
+    @media (max-width: 900px) {
+      justify-content: center;
+    }
+  }
+
+  .im-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, $im-accent, $im-accent-dark);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    box-shadow: 0 10px 24px rgba(138, 92, 214, 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(138, 92, 214, 0.55);
+    }
+  }
+
+  .im-cta-note {
+    color: $im-muted;
+    font-size: 14px;
+  }
+
+  .im-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: $im-muted;
+    font-size: 14px;
+    margin-bottom: 22px;
+
+    @media (max-width: 900px) {
+      justify-content: center;
+    }
+  }
+
+  .im-links {
+    display: flex;
+    gap: 10px;
+    color: $im-muted;
+    font-size: 14px;
+
+    a {
+      color: $im-text;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        border-bottom-color: $im-accent;
+      }
+    }
+
+    @media (max-width: 900px) {
+      justify-content: center;
+    }
+  }
+
+  .im-hero-image {
+    display: flex;
+    justify-content: center;
+  }
+
+  .im-phone {
+    width: min(340px, 80vw);
+    height: auto;
+    border-radius: 38px;
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .im-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    color: $im-text;
+
+    @media (max-width: 720px) {
+      padding: 64px 20px;
+    }
+  }
+
+  .im-section-title {
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 0 0 48px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .im-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+
+    li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: center;
+
+      @media (max-width: 720px) {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        text-align: center;
+      }
+    }
+
+    li:nth-child(even) {
+      .im-step-image { order: -1; }
+      @media (max-width: 720px) {
+        .im-step-image { order: 0; }
+      }
+    }
+  }
+
+  .im-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: rgba(176, 124, 246, 0.2);
+    color: $im-accent;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .im-step-text {
+    h3 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      line-height: 1.2;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.55;
+      color: $im-muted;
+      max-width: 28em;
+    }
+
+    @media (max-width: 720px) {
+      p { margin-left: auto; margin-right: auto; }
+    }
+  }
+
+  .im-step-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    min-height: 480px;
+
+    @media (max-width: 720px) {
+      min-height: 0;
+    }
+  }
+
+  .im-phone-sm {
+    width: min(240px, 60vw);
+    height: auto;
+    border-radius: 32px;
+    box-shadow:
+      0 20px 40px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+  }
+
+  .im-phone-overlap {
+    position: absolute;
+    left: 55%;
+    top: 40px;
+    transform: rotate(4deg);
+
+    @media (max-width: 720px) {
+      position: static;
+      transform: none;
+      margin-top: 20px;
+    }
+  }
+
+  .im-features {
+    border-top: 1px solid $im-card-border;
+    border-bottom: 1px solid $im-card-border;
+  }
+
+  .im-feature-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+
+    @media (max-width: 900px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media (max-width: 560px) {
+      grid-template-columns: 1fr;
+    }
+
+    li {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid $im-card-border;
+      border-radius: 18px;
+      padding: 26px 24px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.55;
+      color: $im-muted;
+    }
+  }
+
+  .im-final {
+    text-align: center;
+
+    p {
+      margin: 0 auto;
+      max-width: 36em;
+      font-size: 17px;
+      line-height: 1.55;
+      color: $im-muted;
+    }
+
+    a {
+      color: $im-accent;
+      text-decoration: underline;
+    }
+  }
+
+  :global(.site-footer) {
+    color: rgba(255, 255, 255, 0.5);
+    a { color: rgba(255, 255, 255, 0.75); }
+    a:hover { color: #fff; }
+  }
+</style>
