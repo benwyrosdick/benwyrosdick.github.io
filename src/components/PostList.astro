@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { excerpt, longDate } from '../lib/format';
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+}
+
+const { posts } = Astro.props;
+---
+
+<div class="cf frame">
+  {posts.map((post) => (
+    <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
+      <div class="article-item">
+        <header class="post-header">
+          <h2 class="post-title" itemprop="name">
+            <a href={`/posts/${post.id}/`} itemprop="url">{post.data.title}</a>
+          </h2>
+        </header>
+        <section class="post-excerpt" itemprop="description">
+          <p>{excerpt(post.body ?? '')}</p>
+        </section>
+        <div class="post-meta">
+          <time datetime={post.data.date.toISOString()}>{longDate(post.data.date)}</time>
+        </div>
+      </div>
+    </article>
+  ))}
+</div>

@@ -13,8 +13,7 @@ const { title, description, image, publishedDate } = Astro.props;
 const pageTitle = title ?? siteConfig.title;
 const pageDescription = description ?? siteConfig.description;
 const canonicalUrl = new URL(Astro.url.pathname, siteConfig.url).toString();
-const ogImage = new URL(image ?? siteConfig.logo, siteConfig.url).toString();
-const twitterImage = new URL(siteConfig.logo, siteConfig.url).toString();
+const socialImage = new URL(image ?? siteConfig.logo, siteConfig.url).toString();
 ---
 
 <head>
@@ -33,13 +32,13 @@ const twitterImage = new URL(siteConfig.logo, siteConfig.url).toString();
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content={siteConfig.twitterHandle} />
   <meta name="twitter:title" content={pageTitle} />
-  <meta name="twitter:image" content={twitterImage} />
+  <meta name="twitter:image" content={socialImage} />
   <meta name="twitter:description" content={pageDescription} />
 
   <meta property="og:site_name" content={siteConfig.title} />
   <meta property="og:title" content={pageTitle} />
   <meta property="og:description" content={pageDescription} />
-  <meta property="og:image" content={ogImage} />
+  <meta property="og:image" content={socialImage} />
   <meta property="og:url" content={canonicalUrl} />
   <meta property="og:type" content="blog" />
   {publishedDate && (

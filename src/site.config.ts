@@ -14,9 +14,9 @@ export const siteConfig = {
       icon: 'twitter',
       url: 'https://twitter.com/benwyrosdick',
       desc: 'Follow me on twitter',
-      shareUrl: 'http://twitter.com/share',
+      shareUrl: 'https://twitter.com/share',
       shareTitle: '?text=',
-      shareLink: '&amp;url=',
+      shareLink: '&url=',
     },
     {
       icon: 'github',

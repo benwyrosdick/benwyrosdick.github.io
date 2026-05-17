@@ -1,12 +1,11 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
-import { siteConfig } from '../site.config';
 import type { APIContext } from 'astro';
+import { siteConfig } from '../site.config';
+import { getSortedPosts } from '../lib/posts';
+import { excerpt } from '../lib/format';
 
 export async function GET(context: APIContext) {
-  const posts = (await getCollection('blog', ({ data }) => !data.draft))
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .slice(0, 10);
+  const posts = (await getSortedPosts()).slice(0, 10);
 
   return rss({
     title: siteConfig.title,
@@ -15,7 +14,7 @@ export async function GET(context: APIContext) {
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
-      description: post.body ?? '',
+      description: post.data.excerpt ?? excerpt(post.body ?? '', 80),
       link: `/posts/${post.id}/`,
       categories: [
         ...(post.data.tags ?? []),

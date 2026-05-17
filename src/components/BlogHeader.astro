@@ -1,0 +1,26 @@
+---
+import { siteConfig } from '../site.config';
+---
+
+<header class="blog-header">
+  <a
+    class="blog-logo"
+    href={siteConfig.url}
+    style={`background-image: url('${siteConfig.authorImage}')`}
+  >
+    {siteConfig.title}
+  </a>
+  <h1 class="blog-title">{siteConfig.title}</h1>
+  <h2 class="blog-description">{siteConfig.description}</h2>
+  <div class="custom-links">
+    {siteConfig.social.map((s) => (
+      <>
+        <a class={`icon-${s.icon}`} href={s.url} title={s.desc}>
+          <i class={`fa fa-${s.icon}`}></i>
+        </a>
+        &nbsp;&nbsp;·&nbsp;&nbsp;
+      </>
+    ))}
+    <a href="/about/">About</a>
+  </div>
+</header>

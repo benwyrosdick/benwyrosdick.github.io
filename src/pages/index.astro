@@ -1,37 +1,14 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogHeader from '../components/BlogHeader.astro';
+import PostList from '../components/PostList.astro';
 import { siteConfig } from '../site.config';
+import { getSortedPosts } from '../lib/posts';
 
-const allPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
-
+const posts = await getSortedPosts();
 const perPage = siteConfig.paginate;
-const page = {
-  data: allPosts.slice(0, perPage),
-  current: 1,
-  total: Math.max(1, Math.ceil(allPosts.length / perPage)),
-};
-
-function excerpt(body: string, words = 50): string {
-  const stripped = body
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/[#>*`_\-\[\]\(\)!]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-  const split = stripped.split(' ').slice(0, words).join(' ');
-  return split + (stripped.split(' ').length > words ? '…' : '');
-}
-
-function longDate(d: Date): string {
-  return d.toLocaleDateString('en-US', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
+const pageData = posts.slice(0, perPage);
+const totalPages = Math.max(1, Math.ceil(posts.length / perPage));
 ---
 
 <BaseLayout>
@@ -41,52 +18,15 @@ function longDate(d: Date): string {
     </div>
   </div>
 
-  <header class="blog-header">
-    <a class="blog-logo" href={siteConfig.url} style={`background-image: url('${siteConfig.authorImage}')`}>
-      {siteConfig.title}
-    </a>
-    <h1 class="blog-title">{siteConfig.title}</h1>
-    <h2 class="blog-description">{siteConfig.description}</h2>
-    <div class="custom-links">
-      {siteConfig.social.map((s) => (
-        <>
-          <a class={`icon-${s.icon}`} href={s.url} title={s.desc}>
-            <i class={`fa fa-${s.icon}`}></i>
-          </a>
-          &nbsp;&nbsp;·&nbsp;&nbsp;
-        </>
-      ))}
-      <a href="/about/">About</a>
-    </div>
-  </header>
+  <BlogHeader />
 
   <main class="content" role="main">
-    <div class="cf frame">
-      {page.data.map((post) => (
-        <article class="post" itemscope itemtype="http://schema.org/BlogPosting" role="article">
-          <div class="article-item">
-            <header class="post-header">
-              <h2 class="post-title" itemprop="name">
-                <a href={`/posts/${post.id}/`} itemprop="url">{post.data.title}</a>
-              </h2>
-            </header>
-            <section class="post-excerpt" itemprop="description">
-              <p>{excerpt(post.body ?? '')}</p>
-            </section>
-            <div class="post-meta">
-              <time datetime={post.data.date.toISOString()}>{longDate(post.data.date)}</time>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
+    <PostList posts={pageData} />
 
-    {page.total > 1 && (
+    {totalPages > 1 && (
       <nav class="pagination" role="navigation">
-        {page.current < page.total && (
-          <a class="newer-posts" href={`/page/${page.current + 1}/`}>&larr; Older posts</a>
-        )}
-        <span class="page-number">Page {page.current} of {page.total}</span>
+        <a class="newer-posts" href="/page/2/">&larr; Older posts</a>
+        <span class="page-number">Page 1 of {totalPages}</span>
       </nav>
     )}
   </main>
