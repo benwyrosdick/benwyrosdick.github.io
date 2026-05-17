@@ -25,9 +25,18 @@ const effectiveDate = 'May 17, 2026';
 
   <h2>Information You Enter</h2>
   <p>
-    Player names and game settings you enter during play exist only in memory on your device
-    for the duration of the game. They are not saved, synced, shared, or sent anywhere, and they
-    are discarded when you close the app or start a new game.
+    The player names and imposter count you enter on the setup screen are saved locally on
+    your device using iOS's standard app preferences (<code>UserDefaults</code>) so that the
+    setup screen restores its state the next time you open the app. This information stays on
+    your device — it is never synced, shared, or sent anywhere.
+  </p>
+  <p>
+    Role assignments and the secret word for a round exist only in memory while the app is
+    running and are not persisted.
+  </p>
+  <p>
+    To clear the saved setup, tap <strong>Reset Options</strong> on the setup screen, or
+    delete the app — uninstalling removes all of its local data.
   </p>
 
   <h2>Analytics and Tracking</h2>
