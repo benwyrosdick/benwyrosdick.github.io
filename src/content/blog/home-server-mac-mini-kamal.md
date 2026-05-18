@@ -12,10 +12,10 @@ This is the setup, end to end.
 
 - **Idle hardware.** Already paid for. Already in the closet.
 - **Plenty of power for hobby apps.** Ivy Bridge i7, 16 GB RAM, ~30 W under load.
-- **Quiet, small, and runs Linux great** once you get past Apple's EFI quirks.
+- **Quiet, small, and runs Linux great** minus some occasional hardware quirks.
 - **24/7 power cost is negligible** at home-electricity rates.
 
-If I were buying hardware fresh I'd probably grab a small N100 mini PC, but the whole point here is that the Mac mini was already there.
+If I were buying hardware fresh I'd probably grab a small Beelink mini PC, but the whole point here is that the Mac mini was already there.
 
 ## Installing Arch on Apple hardware
 
