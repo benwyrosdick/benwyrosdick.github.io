@@ -1,0 +1,302 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import imposterIcon from '../../assets/imposter/app-icon.png';
+import batteryscopeIcon from '../../assets/batteryscope/app-icon.png';
+
+interface AppEntry {
+  slug: string;
+  name: string;
+  tagline: string;
+  description: string;
+  icon: ImageMetadata;
+  accent: string;
+  status: string;
+}
+
+const apps: AppEntry[] = [
+  {
+    slug: 'imposter',
+    name: 'Imposter',
+    tagline: 'Pass-and-play party game',
+    description:
+      "Pass your phone around the table. Everyone sees a secret word — except the imposters. Talk it out, guess who's faking, play again.",
+    icon: imposterIcon,
+    accent: '#b07cf6',
+    status: 'TestFlight beta',
+  },
+  {
+    slug: 'batteryscope',
+    name: 'BatteryScope',
+    tagline: 'Bluetooth BMS monitor',
+    description:
+      'Live stats from your lithium batteries — voltage, current, state of charge, cell balance, time-to-empty. Works with JBD / Xiaoxiang-protocol BMS modules.',
+    icon: batteryscopeIcon,
+    accent: '#2dd47a',
+    status: 'TestFlight beta',
+  },
+];
+---
+
+<BaseLayout
+  title="Apps – Ben Wyrosdick"
+  description="iOS apps built by Ben Wyrosdick."
+>
+  <section class="apps-hero">
+    <div class="apps-hero-bg" aria-hidden="true"></div>
+    <div class="apps-hero-inner">
+      <p class="apps-eyebrow">Apps</p>
+      <h1>Things I'm making</h1>
+      <p class="apps-lead">
+        A small collection of iOS apps I build in evenings and weekends. All local, no accounts,
+        no tracking.
+      </p>
+    </div>
+  </section>
+
+  <section class="apps-grid-section">
+    <ul class="apps-grid">
+      {apps.map((app) => (
+        <li class="app-card" style={`--app-accent: ${app.accent}`}>
+          <a href={`/apps/${app.slug}/`} class="app-card-link">
+            <div class="app-card-head">
+              <Image
+                src={app.icon}
+                alt={`${app.name} app icon`}
+                widths={[96, 192]}
+                sizes="96px"
+                class="app-card-icon"
+              />
+              <div class="app-card-id">
+                <h2>{app.name}</h2>
+                <p class="app-card-tagline">{app.tagline}</p>
+              </div>
+            </div>
+            <p class="app-card-desc">{app.description}</p>
+            <div class="app-card-footer">
+              <span class="app-card-status">{app.status}</span>
+              <span class="app-card-cta">
+                View product page
+                <span class="app-card-arrow" aria-hidden="true">→</span>
+              </span>
+            </div>
+          </a>
+          <div class="app-card-links">
+            <a href={`/apps/${app.slug}/privacy/`}>Privacy</a>
+            <span>·</span>
+            <a href={`/apps/${app.slug}/support/`}>Support</a>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  $bg-1: #0a1130;
+  $bg-2: #161a3e;
+  $text: #ecedf6;
+  $muted: #9aa1c4;
+  $card-border: rgba(255, 255, 255, 0.08);
+
+  :global(body) {
+    background: $bg-1;
+  }
+
+  .apps-hero {
+    position: relative;
+    overflow: hidden;
+    color: $text;
+    padding: 96px 24px 56px;
+
+    @media (max-width: 720px) {
+      padding: 80px 20px 40px;
+    }
+  }
+
+  .apps-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(176, 124, 246, 0.2), transparent 55%),
+      radial-gradient(circle at 90% 100%, rgba(45, 212, 122, 0.18), transparent 60%),
+      linear-gradient(165deg, $bg-1, $bg-2 75%);
+    z-index: 0;
+  }
+
+  .apps-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .apps-eyebrow {
+    margin: 0 0 12px;
+    font-size: 14px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $muted;
+  }
+
+  .apps-hero-inner h1 {
+    margin: 0 0 18px;
+    font-size: 52px;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 800;
+    color: #fff;
+
+    @media (max-width: 720px) { font-size: 40px; }
+  }
+
+  .apps-lead {
+    margin: 0 auto;
+    max-width: 30em;
+    font-size: 18px;
+    line-height: 1.55;
+    color: $muted;
+  }
+
+  .apps-grid-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 24px 96px;
+
+    @media (max-width: 720px) {
+      padding: 16px 20px 72px;
+    }
+  }
+
+  .apps-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+
+    @media (max-width: 720px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .app-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid $card-border;
+    border-radius: 22px;
+    padding: 28px;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+    position: relative;
+
+    &:hover {
+      border-color: var(--app-accent);
+      transform: translateY(-2px);
+    }
+  }
+
+  .app-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .app-card-head {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+
+  .app-card-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
+  }
+
+  .app-card-id {
+    h2 {
+      margin: 0 0 4px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.01em;
+    }
+  }
+
+  .app-card-tagline {
+    margin: 0;
+    color: var(--app-accent);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .app-card-desc {
+    margin: 0 0 24px;
+    color: $muted;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .app-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .app-card-status {
+    color: $muted;
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .app-card-cta {
+    color: var(--app-accent);
+    font-weight: 600;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .app-card-arrow {
+    transition: transform 0.15s ease;
+  }
+
+  .app-card:hover .app-card-arrow {
+    transform: translateX(3px);
+  }
+
+  .app-card-links {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid $card-border;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: $muted;
+    font-size: 13px;
+
+    a {
+      color: $muted;
+      text-decoration: none;
+
+      &:hover {
+        color: $text;
+      }
+    }
+  }
+
+  :global(.site-footer) {
+    color: rgba(255, 255, 255, 0.5);
+    a { color: rgba(255, 255, 255, 0.75); }
+    a:hover { color: #fff; }
+  }
+</style>
