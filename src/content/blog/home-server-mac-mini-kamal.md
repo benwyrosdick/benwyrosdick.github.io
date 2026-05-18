@@ -176,8 +176,8 @@ For Rails specifically, you'll usually want:
 
 ## Tradeoffs
 
-**What I love**: zero recurring cost, total control, dead-simple deploys, exactly one config file per app, no Kubernetes.
+**The good**: zero recurring cost, total control, dead-simple deploys, exactly one config file per app, no Kubernetes.
 
-**What's annoying**: my home internet is the single point of failure. If the modem reboots while I'm out, the apps are offline. For anything I genuinely care about, that's an argument for a $5 VPS — but for "tools I use myself and don't mind being briefly offline," a Mac mini in the closet is just delightful.
+**The bad**: my home internet is the single point of failure. For anything I genuinely care about, that's an argument for real hosting — but for tools I use myself and don't mind being briefly offline, a Mac mini in the closet is just right.
 
 If you've got idle hardware sitting around, this whole setup is maybe a Saturday afternoon to put together. The Kamal docs are the right next stop: <https://kamal-deploy.org/>.
