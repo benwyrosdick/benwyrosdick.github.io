@@ -463,7 +463,12 @@ const tagline = 'Live stats from your Bluetooth lithium batteries — right on y
     justify-content: center;
     min-height: 480px;
 
-    @media (max-width: 720px) { min-height: 0; }
+    @media (max-width: 720px) {
+      min-height: 0;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
   }
 
   .bs-phone-sm {
@@ -484,7 +489,7 @@ const tagline = 'Live stats from your Bluetooth lithium batteries — right on y
     @media (max-width: 720px) {
       position: static;
       transform: none;
-      margin-top: 20px;
+      margin-top: 0;
     }
   }
 
