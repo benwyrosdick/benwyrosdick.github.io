@@ -1,18 +1,87 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import { siteConfig } from '../site.config';
 ---
 
-<PageLayout title="About">
+<PageLayout title="About" image="/assets/images/cover.jpg">
+  <p class="lead">
+    Hi, I'm Ben — a software engineer based in the Birmingham, Alabama area. I build web and
+    mobile apps for a living, and a lot more of them for fun.
+  </p>
+
   <p>
-    I am a Christian, a husband (13+ years), and father of three. I am an entrepreneur and
-    passionate software developer. Over the last decade my focus in software development has been
-    around ruby and web applications.
+    Outside of code I'm a Christian, a husband, and a dad of three. Family and faith come first;
+    everything below is what I do with the time after that.
+  </p>
+
+  <h2>What I work on</h2>
+  <p>
+    Day-to-day I build software at <a href="https://vesyl.com" rel="noopener">VESYL</a>, a
+    shipping platform that helps e-commerce companies automate fulfillment and get orders out
+    the door faster. I spend most of my time on the order-management and warehouse-workflow
+    side: pulling orders in from Shopify, Amazon, eBay, and every storefront in between (each
+    with its own shape and quirks), normalizing them into something a picker can actually act
+    on, and driving the state machine that takes an order from "received" to "on the truck"
+    without anyone in the warehouse losing track of where it is.
   </p>
   <p>
-    I love building things and solving technical problems. My focus has been on gaining mastery in
-    ruby, mostly because it has proved to be both enjoyable to work with and easier to inherit
-    existing projects from other developers than other languages I have worked with. That being
-    said I don't treat it like Maslow's Hammer and enjoy finding the right tools to solve each
-    problem whether that be language, framework, or database.
+    The fun is in the seams — automation rules, batch operations across thousands of orders,
+    keeping inventory honest across channels, and making the screen a warehouse operator
+    stares at all day feel obvious instead of overwhelming.
   </p>
+  <p>
+    Before that I've spent the last decade-plus shipping Ruby on Rails apps, GraphQL APIs, and
+    React frontends across a few startups and a couple of teams I've helped build from scratch.
+  </p>
+
+  <h2>Side projects</h2>
+  <p>
+    Most evenings I'm tinkering with something. Lately that's been iOS apps — see the
+    <a href="/apps/">apps page</a> for the two I'm shipping right now
+    (<a href="/apps/imposter/">Imposter</a>, a pass-and-play party game; and
+    <a href="/apps/batteryscope/">BatteryScope</a>, a Bluetooth BMS monitor for lithium
+    batteries). I also keep a small drawer of CLIs and dev tools open on
+    <a href="https://github.com/benwyrosdick" rel="noopener">GitHub</a>.
+  </p>
+
+  <h2>How I work</h2>
+  <p>
+    I started as a Ruby developer and I still love Ruby for getting an idea into production
+    quickly. But I treat language and framework choice as a tool problem, not an identity:
+    Swift for native iOS, TypeScript for web frontends, Rust and Go for the small tools where
+    a single static binary is the right answer, and whatever the team is already using when I
+    join an existing codebase.
+  </p>
+
+  <h2>Find me</h2>
+  <ul class="contact-list">
+    <li>Email <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
+    <li>GitHub <a href="https://github.com/benwyrosdick" rel="noopener">@benwyrosdick</a></li>
+    <li>X / Twitter <a href="https://twitter.com/benwyrosdick" rel="noopener">@benwyrosdick</a></li>
+    <li>LinkedIn <a href="https://www.linkedin.com/in/bwyrosdick/" rel="noopener">bwyrosdick</a></li>
+  </ul>
 </PageLayout>
+
+<style>
+  .lead {
+    font-size: 26px !important;
+    line-height: 1.4 !important;
+    color: #222 !important;
+  }
+
+  .contact-list {
+    list-style: none;
+    padding-left: 0 !important;
+  }
+  .contact-list li {
+    margin-left: 0 !important;
+    padding-top: 0 !important;
+    margin-bottom: 6px !important;
+  }
+  .contact-list li::before {
+    content: "→ ";
+    color: #b07cf6;
+    font-weight: 700;
+    margin-right: 6px;
+  }
+</style>
