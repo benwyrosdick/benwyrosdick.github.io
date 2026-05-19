@@ -46,7 +46,9 @@ const socialImage = new URL(image ?? siteConfig.logo, siteConfig.url).toString()
   )}
 
   <link rel="canonical" href={canonicalUrl} />
-  <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
   <link rel="alternate" type="application/rss+xml" title={siteConfig.title} href="/feed.xml" />
 
   <link rel="stylesheet" href="https://brick.a.ssl.fastly.net/Linux+Libertine:400,400i,700,700i/Open+Sans:400,400i,700,700i" />
