@@ -29,10 +29,20 @@ const tagline = 'Live stats from your Bluetooth lithium batteries — right on y
           aggregate stats.
         </p>
         <div class="bs-cta-row">
-          <a class="bs-cta" href="mailto:ben.wyrosdick@gmail.com?subject=BatteryScope%20TestFlight">
-            Join the TestFlight beta
+          <a
+            class="bs-cta"
+            href="https://apps.apple.com/us/app/batteryscope/id6768128405"
+            rel="noopener"
+          >
+            <svg class="bs-cta-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M19.1 17.2c-.3.7-.6 1.3-1 1.8-.6.8-1.1 1.4-1.5 1.7-.6.5-1.3.8-2 .8-.5 0-1.1-.1-1.8-.4-.7-.3-1.3-.4-1.9-.4-.6 0-1.2.1-1.9.4-.7.3-1.3.4-1.7.4-.7 0-1.4-.3-2-.8-.4-.3-.9-.9-1.5-1.8-.7-.9-1.2-2-1.7-3.2-.5-1.3-.7-2.6-.7-3.8 0-1.4.3-2.6.9-3.6.5-.8 1.1-1.5 1.9-1.9.8-.5 1.7-.7 2.6-.7.5 0 1.2.2 2 .5.8.3 1.3.5 1.6.5.2 0 .8-.2 1.7-.5.9-.3 1.6-.5 2.2-.4 1.6.1 2.8.7 3.6 1.9-1.4.9-2.1 2.1-2.1 3.7 0 1.2.5 2.3 1.3 3.1.4.4.9.7 1.4.9-.1.3-.2.6-.4 1zM15.4 4.6c0 .9-.3 1.8-1 2.6-.8 1-1.8 1.5-2.9 1.4 0-.1 0-.2 0-.3 0-.9.4-1.9 1.1-2.6.4-.4.8-.7 1.4-.9.5-.2 1-.3 1.5-.3 0 .1 0 .1 0 .1z"
+              />
+            </svg>
+            Download on the App Store
           </a>
-          <span class="bs-cta-note">Coming soon to the App Store</span>
+          <span class="bs-cta-note">Free on iPhone &amp; iPad</span>
         </div>
         <div class="bs-meta">
           <span>iPhone &amp; iPad</span>
@@ -190,14 +200,28 @@ const tagline = 'Live stats from your Bluetooth lithium batteries — right on y
   </section>
 
   <section class="bs-section bs-final">
-    <h2 class="bs-section-title">Get notified at launch</h2>
+    <h2 class="bs-section-title">Get it now</h2>
     <p>
-      BatteryScope is heading into TestFlight. Email
-      <a href="mailto:ben.wyrosdick@gmail.com?subject=BatteryScope%20TestFlight">
+      BatteryScope is live on the App Store for iPhone and iPad. Questions, feedback, or a BMS
+      that isn't working right? Email
+      <a href="mailto:ben.wyrosdick@gmail.com?subject=BatteryScope">
         ben.wyrosdick@gmail.com
       </a>
-      to join the beta — please mention the battery brand and model you'd like to monitor.
+      — please mention your battery brand and model so I can help.
     </p>
+    <a
+      class="bs-cta bs-final-cta"
+      href="https://apps.apple.com/us/app/batteryscope/id6768128405"
+      rel="noopener"
+    >
+      <svg class="bs-cta-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path
+          fill="currentColor"
+          d="M19.1 17.2c-.3.7-.6 1.3-1 1.8-.6.8-1.1 1.4-1.5 1.7-.6.5-1.3.8-2 .8-.5 0-1.1-.1-1.8-.4-.7-.3-1.3-.4-1.9-.4-.6 0-1.2.1-1.9.4-.7.3-1.3.4-1.7.4-.7 0-1.4-.3-2-.8-.4-.3-.9-.9-1.5-1.8-.7-.9-1.2-2-1.7-3.2-.5-1.3-.7-2.6-.7-3.8 0-1.4.3-2.6.9-3.6.5-.8 1.1-1.5 1.9-1.9.8-.5 1.7-.7 2.6-.7.5 0 1.2.2 2 .5.8.3 1.3.5 1.6.5.2 0 .8-.2 1.7-.5.9-.3 1.6-.5 2.2-.4 1.6.1 2.8.7 3.6 1.9-1.4.9-2.1 2.1-2.1 3.7 0 1.2.5 2.3 1.3 3.1.4.4.9.7 1.4.9-.1.3-.2.6-.4 1zM15.4 4.6c0 .9-.3 1.8-1 2.6-.8 1-1.8 1.5-2.9 1.4 0-.1 0-.2 0-.3 0-.9.4-1.9 1.1-2.6.4-.4.8-.7 1.4-.9.5-.2 1-.3 1.5-.3 0 .1 0 .1 0 .1z"
+        />
+      </svg>
+      Download on the App Store
+    </a>
   </section>
 </BaseLayout>
 
@@ -305,6 +329,7 @@ const tagline = 'Live stats from your Bluetooth lithium batteries — right on y
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
     background: linear-gradient(135deg, $bs-accent, $bs-accent-dark);
     color: #06210f;
     text-decoration: none;
@@ -320,6 +345,16 @@ const tagline = 'Live stats from your Bluetooth lithium batteries — right on y
       transform: translateY(-1px);
       box-shadow: 0 14px 30px rgba(30, 168, 99, 0.55);
     }
+  }
+
+  .bs-cta-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  .bs-final-cta {
+    margin-top: 28px;
   }
 
   .bs-cta-note {
