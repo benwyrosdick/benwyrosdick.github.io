@@ -1,9 +1,12 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import TopTerminal from '../components/TopTerminal.astro';
 import { siteConfig } from '../site.config';
 ---
 
-<PageLayout title="About" image="/assets/images/cover.jpg">
+<PageLayout title="About">
+  <TopTerminal slot="hero" embedded />
+
   <p class="lead">
     Hi, I'm Ben — a software engineer based in the Birmingham, Alabama area. I build web and
     mobile apps for a living, and a lot more of them for fun.
@@ -41,7 +44,8 @@ import { siteConfig } from '../site.config';
     (<a href="/apps/imposter/">Imposter</a>, a pass-and-play party game; and
     <a href="/apps/batteryscope/">BatteryScope</a>, a Bluetooth BMS monitor for lithium
     batteries). I also keep a small drawer of CLIs and dev tools open on
-    <a href="https://github.com/benwyrosdick" rel="noopener">GitHub</a>.
+    <a href="https://github.com/benwyrosdick" rel="noopener">GitHub</a> — the live list is
+    running in the processes above.
   </p>
 
   <h2>How I work</h2>
