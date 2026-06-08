@@ -178,7 +178,7 @@ const payload = JSON.stringify({ birth: BIRTH, procs });
       ) as { birth: string; procs: Proc[] };
 
       const BIRTH = new Date(data.birth);
-      const base = data.procs.map((p) => ({ ...p, baseCpu: p.cpu }));
+      let base = data.procs.map((p) => ({ ...p, baseCpu: p.cpu }));
       let load = [1.21, 1.08, 0.94];
 
       const esc = (s: string) =>
@@ -297,6 +297,69 @@ const payload = JSON.stringify({ birth: BIRTH, procs });
 
       render();
       setInterval(render, 1000);
+
+      // Client-side refresh: re-fetch GitHub on load so the last-push (and
+      // everything derived from it) is always current, no rebuild needed.
+      // The build-time data above is the instant paint + offline fallback.
+      type Repo = { name: string; lang: string | null; size: number; created: string; pushed: string };
+
+      function mapRepo(r: Repo, i: number, now: number): Proc & { baseCpu: number } {
+        const DAY = 86_400_000;
+        const between = (a: number, b: number) => Math.max(0, Math.floor((b - a) / DAY));
+        const created = new Date(r.created + 'T00:00:00').getTime();
+        const pushed = new Date(r.pushed + 'T00:00:00').getTime();
+        const daysActive = Math.max(1, between(created, pushed));
+        const daysIdle = between(pushed, now);
+
+        const cpu = Math.max(0.1, +(62 * Math.exp(-daysIdle / 45)).toFixed(1));
+        const s = daysIdle < 21 ? 'R' : daysIdle > 300 ? 'Z' : 'S';
+
+        const resMiB = Math.max(2, Math.round(r.size / 8));
+        const virt = resMiB * 5 + 142;
+        const shr = Math.round(resMiB / 4) + 8;
+        const mem = +Math.min(48, (resMiB / 64000) * 100).toFixed(1);
+
+        const totalSecs = daysActive * 60;
+        const time = `${Math.floor(totalSecs / 60)}:${two(totalSecs % 60)}.${String((r.name.length * 7) % 100).padStart(2, '0')}`;
+        const cmd = r.lang ? `${r.name} --lang=${r.lang.toLowerCase()}` : r.name;
+
+        return {
+          pid: 1024 + i * 173 + (r.size % 97),
+          user: 'ben', pr: '20', ni: 5, virt, res: resMiB, shr, s, cpu, mem, time, cmd,
+          kind: 'project', baseCpu: cpu,
+        };
+      }
+
+      async function refreshFromGitHub() {
+        try {
+          const res = await fetch(
+            'https://api.github.com/users/benwyrosdick/repos?per_page=100&sort=pushed'
+          );
+          if (!res.ok) return; // rate-limited or offline: keep baked data
+          const json = (await res.json()) as any[];
+          const repos: Repo[] = json
+            .filter((r) => !r.fork && !r.archived)
+            .slice(0, 12)
+            .map((r) => ({
+              name: r.name,
+              lang: r.language,
+              size: r.size,
+              created: r.created_at.slice(0, 10),
+              pushed: r.pushed_at.slice(0, 10),
+            }));
+          if (!repos.length) return;
+
+          const now = Date.now();
+          const specials = base.filter((p) => p.kind !== 'project');
+          const projects = repos.map((r, i) => mapRepo(r, i, now));
+          base = [...specials, ...projects];
+          render();
+        } catch {
+          /* keep baked data */
+        }
+      }
+
+      refreshFromGitHub();
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'q' || e.key === 'Q') window.location.href = '/';
