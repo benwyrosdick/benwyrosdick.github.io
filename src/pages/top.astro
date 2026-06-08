@@ -123,10 +123,6 @@ const lifeTime = `${Math.floor(yearsAlive * 365.25 * 1440 / 60)}:00.00`;
 
 const special: Proc[] = [
   {
-    pid: 1, user: 'ben', pr: 'rt', ni: 0, virt: 999999, res: 65500, shr: 4096,
-    s: 'R', cpu: 41.5, mem: 24.8, time: lifeTime, cmd: '[chores] ', kind: 'kernel',
-  },
-  {
     pid: 2, user: 'ben', pr: 'rt', ni: 0, virt: 999999, res: 60200, shr: 4096,
     s: 'R', cpu: 57.3, mem: 22.1, time: lifeTime, cmd: '[family] --wife --kids=3', kind: 'kernel',
   },
