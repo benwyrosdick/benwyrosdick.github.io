@@ -14,6 +14,10 @@ interface Props {
 
 const { title, description, image, author } = Astro.props;
 const displayAuthor = author ?? siteConfig.author;
+
+// When a `hero` slot is supplied it replaces the cover-image banner.
+const hasHero = Astro.slots.has('hero');
+const showImage = image && !hasHero;
 ---
 
 <!DOCTYPE html>
@@ -23,7 +27,12 @@ const displayAuthor = author ?? siteConfig.author;
     <Header />
     <main class="content" role="main">
       <article class="post">
-        {image ? (
+        {hasHero && (
+          <section class="hero-slot">
+            <slot name="hero" />
+          </section>
+        )}
+        {showImage ? (
           <div class="article-image">
             <div class="post-image-image" style={`background-image: url(${image})`}>
               Article Image
@@ -80,3 +89,17 @@ const displayAuthor = author ?? siteConfig.author;
     <Scripts />
   </body>
 </html>
+
+<style>
+  /* Break out of the 800px content column so the terminal can be wider
+     than the prose, while staying centered on the viewport. */
+  .hero-slot {
+    width: min(1040px, calc(100vw - 24px));
+    margin-left: 50%;
+    transform: translateX(-50%);
+    padding: 90px 0 8px;
+  }
+  @media (max-width: 600px) {
+    .hero-slot { padding-top: 70px; }
+  }
+</style>
