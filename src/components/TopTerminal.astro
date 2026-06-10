@@ -278,16 +278,12 @@ const payload = JSON.stringify({ birth: BIRTH, procs });
     const l4 = 'MiB Mem :  <b>64000.0</b> total, <b>11240.6</b> free, <b>40118.2</b> used, <b>12641.2</b> buff/cache';
     const l5 = 'MiB Swap:   8192.0 total,  8000.4 free,   191.6 used. <b>20402.7</b> avail Mem';
 
+    // No shell prompt below the table — top runs modally and owns the
+    // whole screen; the prompt only returns once you quit.
     const lines = [
       l1, l2, l3, l4, l5, '',
       `<span class="colhdr">${esc(HEADER)}</span>`,
       ...sorted.map(row),
-      '',
-      `<span class="prompt">ben@benwyrosdick</span>:<span class="path">~</span>$ ` +
-        (embedded
-          ? ''
-          : `<span class="hint">press <b>q</b> to quit → benwyrosdick.com</span>`) +
-        `<span class="cursor">▋</span>`,
     ];
 
     document.getElementById('screen')!.innerHTML = lines.join('\n');
@@ -427,9 +423,4 @@ const payload = JSON.stringify({ birth: BIRTH, procs });
   .topterm-screen .c-kernel { color: #5ad6df; font-weight: 700; }
   .topterm-screen .c-job { color: #ecc463; font-weight: 700; }
   .topterm-screen .c-proj { color: #d7dde7; }
-  .topterm-screen .prompt { color: #7ee787; font-weight: 700; }
-  .topterm-screen .path { color: #88adf9; }
-  .topterm-screen .hint { color: #99a3b3; }
-  .topterm-screen .cursor { color: #d7dde7; animation: topterm-blink 1.1s steps(1) infinite; }
-  @keyframes topterm-blink { 50% { opacity: 0; } }
 </style>

@@ -13,6 +13,7 @@ import TopTerminal from '../components/TopTerminal.astro';
   </head>
   <body class="top-page">
     <TopTerminal />
+    <p class="top-hint">press <b>q</b> to quit → benwyrosdick.com</p>
     <noscript>
       <p class="top-noscript">
         This page renders with JavaScript. Read the plain version on the
@@ -38,4 +39,11 @@ import TopTerminal from '../components/TopTerminal.astro';
     padding: 1rem;
   }
   .top-noscript a { color: #7aa2f7; }
+  .top-hint {
+    font-family: "SF Mono", "JetBrains Mono", "Fira Code", Menlo, Consolas, monospace;
+    color: #99a3b3;
+    font-size: 13px;
+    margin: 14px 0 0;
+  }
+  .top-hint b { color: #d7dde7; }
 </style>
