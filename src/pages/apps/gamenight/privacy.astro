@@ -1,0 +1,55 @@
+---
+import AppPageLayout from '../../../layouts/AppPageLayout.astro';
+import { siteConfig } from '../../../site.config';
+
+const effectiveDate = 'May 25, 2026';
+---
+
+<AppPageLayout
+  appName="Gamenight Scoreboard"
+  pageTitle="Privacy Policy"
+  description="Privacy policy for the Gamenight Scoreboard iOS app."
+>
+  <p class="muted"><strong>Effective date:</strong> {effectiveDate}</p>
+
+  <p>
+    Gamenight Scoreboard is an iOS application designed to help you keep score during board games, card games, and tabletop gaming sessions. This privacy policy explains what information the app does and does not collect.
+  </p>
+
+  <h2>Information We Collect</h2>
+  <p>
+    <strong>None.</strong> Gamenight Scoreboard does not collect, store, or transmit any personal information. The app runs entirely offline, has no user accounts, does not use external servers, and makes no network requests.
+  </p>
+
+  <h2>Information You Enter</h2>
+  <p>
+    The player names, scores, game options (such as timed rounds, target scores, and phase tracking), and history of played games that you enter are stored locally on your device using iOS's native storage APIs (<code>SwiftData</code> and <code>UserDefaults</code>). 
+  </p>
+  <p>
+    This data is saved on your device to let you pause a game and resume it later, or to review the history of your past game nights. None of this information is synced to any cloud service (unless you back up your device to iCloud), shared with third parties, or sent to the developer.
+  </p>
+  <p>
+    You can delete your game history from within the app, or delete the app entirely — uninstalling the app removes all of its local data from your device.
+  </p>
+
+  <h2>Analytics and Tracking</h2>
+  <p>
+    Gamenight Scoreboard contains no advertising, no analytics SDKs, no third-party tracking, and no telemetry of any kind.
+  </p>
+
+  <h2>Children's Privacy</h2>
+  <p>
+    Because Gamenight Scoreboard does not collect, store, or share any personal information, it does not knowingly collect information from children under 13. The app is completely safe for players of all ages.
+  </p>
+
+  <h2>Changes to This Policy</h2>
+  <p>
+    If this policy is updated, the changes will be posted on this page with a new effective date.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    If you have any questions or feedback regarding this privacy policy, you can send an email to
+    <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.
+  </p>
+</AppPageLayout>

@@ -1,0 +1,64 @@
+---
+import AppPageLayout from '../../../layouts/AppPageLayout.astro';
+import { siteConfig } from '../../../site.config';
+---
+
+<AppPageLayout
+  appName="Gamenight Scoreboard"
+  pageTitle="Support"
+  description="Support and contact information for the Gamenight Scoreboard iOS app."
+>
+  <p>
+    Gamenight Scoreboard is a clean, modern iOS app designed to make keeping score during tabletop game nights effortless. Gather your friends, customize your rules, and let the app handle the math.
+  </p>
+
+  <h2>Contact & Feedback</h2>
+  <p>
+    Have questions, found a bug, or want to request a feature? Email
+    <a href={`mailto:${siteConfig.email}?subject=Gamenight%20Scoreboard%20Support`}>{siteConfig.email}</a>
+    and I'll get back to you as soon as possible.
+  </p>
+
+  <h2>How to Use</h2>
+  <ol>
+    <li>
+      <strong>Set Up Players:</strong> On the home screen, tap "New Game". Add your players and type their names.
+    </li>
+    <li>
+      <strong>Configure Rules:</strong> Toggle game-specific rules for your session:
+      <ul>
+        <li><strong>Timed Rounds:</strong> Enable a countdown timer per round to keep the game moving.</li>
+        <li><strong>Track Phases:</strong> Perfect for games like Phase 10, Sequence, or Rummy where players progress through distinct phases.</li>
+        <li><strong>Stop Score:</strong> Enter a target score. The game will automatically end and declare a winner when a player crosses it (supports highest- or lowest-score wins).</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Keep Score:</strong> After each round, tap "Enter Scores" and log points for each player. The scoreboard shows running totals, round logs, and current ranks.
+    </li>
+    <li>
+      <strong>History & Autosave:</strong> Close the app or lock your device without worry. Active games are saved automatically and can be resumed from the main list. Past games are preserved in your history.
+    </li>
+  </ol>
+
+  <h2>Common Questions</h2>
+
+  <h3>Does the app work without an internet connection?</h3>
+  <p>
+    Yes. Gamenight Scoreboard is 100% offline. It runs completely on your device and does not require an active internet connection or cellular data.
+  </p>
+
+  <h3>Are my games and players synced to other devices?</h3>
+  <p>
+    No. All data is saved locally on your iPhone or iPad using Apple's <code>SwiftData</code> framework. It does not sync to a central server.
+  </p>
+
+  <h3>Which devices are supported?</h3>
+  <p>
+    Gamenight Scoreboard requires iOS 17 or later. It runs natively on both iPhone and iPad.
+  </p>
+
+  <h3>How do I delete a game or player?</h3>
+  <p>
+    Swipe left on a game in your history list to delete it. To remove a player during new game setup, tap the minus icon next to their name.
+  </p>
+</AppPageLayout>

@@ -3,6 +3,8 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import imposterIcon from '../../assets/imposter/app-icon.png';
 import batteryscopeIcon from '../../assets/batteryscope/app-icon.png';
+import gamenightIcon from '../../assets/gamenight/app-icon.png';
+import dockitIcon from '../../assets/dockit/app-icon.png';
 
 interface AppEntry {
   slug: string;
@@ -12,35 +14,89 @@ interface AppEntry {
   icon: ImageMetadata;
   accent: string;
   status: string;
+  /** Where the main card links. Defaults to the internal product page. */
+  href?: string;
+  external?: boolean;
+  cta?: string;
+  /** Footer links. Defaults to the internal Privacy / Support pages. */
+  links?: { label: string; href: string }[];
 }
 
-const apps: AppEntry[] = [
+interface AppSection {
+  id: string;
+  title: string;
+  blurb: string;
+  apps: AppEntry[];
+}
+
+const sections: AppSection[] = [
   {
-    slug: 'imposter',
-    name: 'Imposter',
-    tagline: 'Pass-and-play party game',
-    description:
-      "Pass your phone around the table. Everyone sees a secret word — except the imposters. Talk it out, guess who's faking, play again.",
-    icon: imposterIcon,
-    accent: '#b07cf6',
-    status: 'On the App Store',
+    id: 'ios',
+    title: 'iOS',
+    blurb: 'Built for iPhone. All local, no accounts, no tracking.',
+    apps: [
+      {
+        slug: 'gamenight',
+        name: 'Gamenight Scoreboard',
+        tagline: 'Simple game night score keeper',
+        description:
+          'Track scores round by round. Customize rules with timed rounds, phase tracking, and auto-end target scores. Fully offline and private.',
+        icon: gamenightIcon,
+        accent: '#ffc24a',
+        status: 'TestFlight beta',
+      },
+      {
+        slug: 'imposter',
+        name: 'Imposter',
+        tagline: 'Pass-and-play party game',
+        description:
+          "Pass your phone around the table. Everyone sees a secret word — except the imposters. Talk it out, guess who's faking, play again.",
+        icon: imposterIcon,
+        accent: '#b07cf6',
+        status: 'On the App Store',
+      },
+      {
+        slug: 'batteryscope',
+        name: 'BatteryScope',
+        tagline: 'Bluetooth BMS monitor',
+        description:
+          'Live stats from your lithium batteries — voltage, current, state of charge, cell balance, time-to-empty. Works with JBD / Xiaoxiang-protocol BMS modules.',
+        icon: batteryscopeIcon,
+        accent: '#2dd47a',
+        status: 'On the App Store',
+      },
+    ],
   },
   {
-    slug: 'batteryscope',
-    name: 'BatteryScope',
-    tagline: 'Bluetooth BMS monitor',
-    description:
-      'Live stats from your lithium batteries — voltage, current, state of charge, cell balance, time-to-empty. Works with JBD / Xiaoxiang-protocol BMS modules.',
-    icon: batteryscopeIcon,
-    accent: '#2dd47a',
-    status: 'On the App Store',
+    id: 'desktop',
+    title: 'Desktop',
+    blurb: 'Native apps for the Mac and Linux desktop.',
+    apps: [
+      {
+        slug: 'dockit',
+        name: 'Dockit',
+        tagline: 'A native Docker GUI',
+        description:
+          'Manage Docker without the command line. Browse containers, images, volumes, and networks, stream live logs, watch CPU and memory, and run Compose projects — all from a fast native desktop app.',
+        icon: dockitIcon,
+        accent: '#34c9a3',
+        status: 'Open source · macOS & Linux',
+        href: 'https://github.com/benwyrosdick/dockit',
+        external: true,
+        cta: 'View on GitHub',
+        links: [
+          { label: 'Download', href: 'https://github.com/benwyrosdick/dockit/releases' },
+          { label: 'Source', href: 'https://github.com/benwyrosdick/dockit' },
+        ],
+      },
+    ],
   },
 ];
 ---
 
 <BaseLayout
   title="Apps – Ben Wyrosdick"
-  description="iOS apps built by Ben Wyrosdick."
+  description="iOS and desktop apps built by Ben Wyrosdick."
 >
   <section class="apps-hero">
     <div class="apps-hero-bg" aria-hidden="true"></div>
@@ -48,48 +104,75 @@ const apps: AppEntry[] = [
       <p class="apps-eyebrow">Apps</p>
       <h1>Things I'm making</h1>
       <p class="apps-lead">
-        A small collection of iOS apps I build in evenings and weekends. All local, no accounts,
-        no tracking.
+        A small collection of iOS and desktop apps I build in evenings and weekends. All local,
+        no accounts, no tracking.
       </p>
     </div>
   </section>
 
-  <section class="apps-grid-section">
-    <ul class="apps-grid">
-      {apps.map((app) => (
-        <li class="app-card" style={`--app-accent: ${app.accent}`}>
-          <a href={`/apps/${app.slug}/`} class="app-card-link">
-            <div class="app-card-head">
-              <Image
-                src={app.icon}
-                alt={`${app.name} app icon`}
-                widths={[96, 192]}
-                sizes="96px"
-                class="app-card-icon"
-              />
-              <div class="app-card-id">
-                <h2>{app.name}</h2>
-                <p class="app-card-tagline">{app.tagline}</p>
+  {sections.map((section) => (
+    <section class="apps-grid-section">
+      <div class="apps-section-head">
+        <h2 class="apps-section-title">{section.title}</h2>
+        <p class="apps-section-blurb">{section.blurb}</p>
+      </div>
+      <ul class="apps-grid">
+        {section.apps.map((app) => {
+          const cardHref = app.href ?? `/apps/${app.slug}/`;
+          const cta = app.cta ?? 'View product page';
+          const links = app.links ?? [
+            { label: 'Privacy', href: `/apps/${app.slug}/privacy/` },
+            { label: 'Support', href: `/apps/${app.slug}/support/` },
+          ];
+          const external = app.external ?? false;
+          return (
+            <li class="app-card" style={`--app-accent: ${app.accent}`}>
+              <a
+                href={cardHref}
+                class="app-card-link"
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+              >
+                <div class="app-card-head">
+                  <Image
+                    src={app.icon}
+                    alt={`${app.name} app icon`}
+                    widths={[96, 192]}
+                    sizes="96px"
+                    class="app-card-icon"
+                  />
+                  <div class="app-card-id">
+                    <h3>{app.name}</h3>
+                    <p class="app-card-tagline">{app.tagline}</p>
+                  </div>
+                </div>
+                <p class="app-card-desc">{app.description}</p>
+                <div class="app-card-footer">
+                  <span class="app-card-status">{app.status}</span>
+                  <span class="app-card-cta">
+                    {cta}
+                    <span class="app-card-arrow" aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </a>
+              <div class="app-card-links">
+                {links.map((link, i) => (
+                  <>
+                    {i > 0 && <span>·</span>}
+                    <a
+                      href={link.href}
+                      target={external ? '_blank' : undefined}
+                      rel={external ? 'noopener noreferrer' : undefined}
+                    >{link.label}</a>
+                  </>
+                ))}
               </div>
-            </div>
-            <p class="app-card-desc">{app.description}</p>
-            <div class="app-card-footer">
-              <span class="app-card-status">{app.status}</span>
-              <span class="app-card-cta">
-                View product page
-                <span class="app-card-arrow" aria-hidden="true">→</span>
-              </span>
-            </div>
-          </a>
-          <div class="app-card-links">
-            <a href={`/apps/${app.slug}/privacy/`}>Privacy</a>
-            <span>·</span>
-            <a href={`/apps/${app.slug}/support/`}>Support</a>
-          </div>
-        </li>
-      ))}
-    </ul>
-  </section>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  ))}
 </BaseLayout>
 
 <style lang="scss">
@@ -162,11 +245,39 @@ const apps: AppEntry[] = [
   .apps-grid-section {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 24px 24px 96px;
+    padding: 24px 24px 8px;
+
+    &:last-of-type {
+      padding-bottom: 96px;
+    }
 
     @media (max-width: 720px) {
-      padding: 16px 20px 72px;
+      padding: 16px 20px 8px;
+
+      &:last-of-type {
+        padding-bottom: 72px;
+      }
     }
+  }
+
+  .apps-section-head {
+    margin: 24px 0 20px;
+  }
+
+  .apps-section-title {
+    margin: 0 0 6px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+
+  .apps-section-blurb {
+    margin: 0;
+    color: $muted;
+    font-size: 15px;
+    line-height: 1.5;
   }
 
   .apps-grid {
@@ -218,7 +329,7 @@ const apps: AppEntry[] = [
   }
 
   .app-card-id {
-    h2 {
+    h3 {
       margin: 0 0 4px;
       font-size: 24px;
       font-weight: 700;

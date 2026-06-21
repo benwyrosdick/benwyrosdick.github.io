@@ -1,0 +1,1088 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import appIcon from '../../../assets/gamenight/app-icon.png';
+
+const tagline = 'Track scores, set custom rules, and keep game night moving.';
+---
+
+<BaseLayout
+  title="Gamenight Scoreboard – Simple game night score keeper for iPhone & iPad"
+  description={tagline}
+>
+  <section class="gn-hero">
+    <div class="gn-hero-bg" aria-hidden="true"></div>
+    <div class="gn-hero-inner">
+      <div class="gn-hero-copy">
+        <Image src={appIcon} alt="Gamenight Scoreboard app icon" class="gn-app-icon" widths={[120, 240]} sizes="120px" />
+        <h1>Gamenight Scoreboard</h1>
+        <p class="gn-tagline">{tagline}</p>
+        <p class="gn-sub">
+          Ditch the scratch paper and stubby pencils. Set up players, toggle game-specific options like phase tracking and countdown timers, and log scores round by round. Built natively for iPhone and iPad.
+        </p>
+        <div class="gn-cta-row">
+          <a
+            class="gn-cta"
+            href="mailto:ben.wyrosdick@gmail.com?subject=Gamenight%20TestFlight%20access&body=I'd%20like%20to%20join%20the%20Gamenight%20Scoreboard%20TestFlight%20beta."
+          >
+            Request TestFlight access
+          </a>
+        </div>
+        <div class="gn-meta">
+          <span>TestFlight beta</span>
+          <span>·</span>
+          <span>iPhone &amp; iPad</span>
+          <span>·</span>
+          <span>iOS 17+</span>
+          <span>·</span>
+          <span>No ads, no accounts, no tracking</span>
+        </div>
+        <div class="gn-links">
+          <a href="/apps/gamenight/privacy/">Privacy Policy</a>
+          <span>·</span>
+          <a href="/apps/gamenight/support/">Support</a>
+        </div>
+      </div>
+      <div class="gn-hero-image">
+        <!-- CSS Phone Frame: Scoreboard View -->
+        <div class="gn-phone-wrapper">
+          <div class="gn-phone">
+            <div class="gn-phone-screen">
+              <div class="gn-phone-header">
+                <span class="gn-time">9:41</span>
+                <div class="gn-dynamic-island"></div>
+                <div class="gn-status-icons">
+                  <span>📶</span>
+                  <span>🔋</span>
+                </div>
+              </div>
+              <div class="gn-app-nav">
+                <span class="gn-nav-btn">Cancel</span>
+                <span class="gn-nav-title">Scoreboard</span>
+                <span class="gn-nav-btn gn-accent-color">Edit</span>
+              </div>
+              <div class="gn-app-body">
+                <!-- Round Timer Card -->
+                <div class="gn-ui-card gn-timer-card">
+                  <div class="gn-timer-info">
+                    <span class="gn-card-label">ROUND TIMER</span>
+                    <span class="gn-timer-val">0:42</span>
+                  </div>
+                  <div class="gn-timer-ring">
+                    <svg class="gn-ring-svg" viewBox="0 0 36 36">
+                      <path class="gn-ring-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                      <path class="gn-ring-fg" stroke-dasharray="70, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Scores list -->
+                <div class="gn-scoreboard-list">
+                  <div class="gn-list-header">
+                    <span>RANK &amp; PLAYER</span>
+                    <span>TOTAL</span>
+                  </div>
+                  <div class="gn-score-row gn-rank-1">
+                    <div class="gn-player-info">
+                      <span class="gn-rank-badge">1</span>
+                      <div>
+                        <div class="gn-player-name">Alice</div>
+                        <div class="gn-player-sub">Phase 6 · R5: +20</div>
+                      </div>
+                    </div>
+                    <span class="gn-player-score">145</span>
+                  </div>
+                  <div class="gn-score-row">
+                    <div class="gn-player-info">
+                      <span class="gn-rank-badge">2</span>
+                      <div>
+                        <div class="gn-player-name">Charlie</div>
+                        <div class="gn-player-sub">Phase 5 · R5: +10</div>
+                      </div>
+                    </div>
+                    <span class="gn-player-score">115</span>
+                  </div>
+                  <div class="gn-score-row">
+                    <div class="gn-player-info">
+                      <span class="gn-rank-badge">3</span>
+                      <div>
+                        <div class="gn-player-name">Bob</div>
+                        <div class="gn-player-sub">Phase 5 · R5: +45</div>
+                      </div>
+                    </div>
+                    <span class="gn-player-score">90</span>
+                  </div>
+                  <div class="gn-score-row gn-rank-last">
+                    <div class="gn-player-info">
+                      <span class="gn-rank-badge">4</span>
+                      <div>
+                        <div class="gn-player-name">Dave</div>
+                        <div class="gn-player-sub">Phase 4 · R5: +5</div>
+                      </div>
+                    </div>
+                    <span class="gn-player-score">65</span>
+                  </div>
+                </div>
+
+                <!-- Action Button -->
+                <button class="gn-app-btn">Enter Round 6 Scores</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="gn-section">
+    <h2 class="gn-section-title">A scoreboard that adapts to your game</h2>
+    <ol class="gn-steps">
+      <li>
+        <div class="gn-step-text">
+          <span class="gn-step-num">1</span>
+          <h3>Timed rounds keep things moving</h3>
+          <p>
+            No more analysis paralysis. Enable the round timer, set a countdown limit, and keep your group focused. The timer is displayed right at the top of the scoreboard.
+          </p>
+        </div>
+        <div class="gn-step-image">
+          <!-- Mini CSS Phone: Timer Options -->
+          <div class="gn-phone-sm">
+            <div class="gn-phone-screen">
+              <div class="gn-app-nav-sm">
+                <span class="gn-nav-title">Round Options</span>
+              </div>
+              <div class="gn-app-body">
+                <div class="gn-ui-card">
+                  <div class="gn-settings-row">
+                    <div>
+                      <div class="gn-setting-name">Timed Rounds</div>
+                      <div class="gn-setting-desc">Countdown timer for each round</div>
+                    </div>
+                    <div class="gn-ios-switch gn-switch-on"></div>
+                  </div>
+                  <div class="gn-settings-slider-row">
+                    <div class="gn-slider-labels">
+                      <span>Duration</span>
+                      <span class="gn-accent-color">60 seconds</span>
+                    </div>
+                    <div class="gn-ios-slider">
+                      <div class="gn-slider-track"></div>
+                      <div class="gn-slider-fill" style="width: 40%"></div>
+                      <div class="gn-slider-thumb" style="left: 40%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="gn-step-text">
+          <span class="gn-step-num">2</span>
+          <h3>Track phases and target limits</h3>
+          <p>
+            Perfect for Phase 10, Sequence, or Rummy. Track which phase each player is on alongside their scores. Enable a stop score to automatically end the game when a target is hit — with highest or lowest score winning.
+          </p>
+        </div>
+        <div class="gn-step-image">
+          <!-- Mini CSS Phone: Stop Score Options -->
+          <div class="gn-phone-sm">
+            <div class="gn-phone-screen">
+              <div class="gn-app-nav-sm">
+                <span class="gn-nav-title">Game Ending Options</span>
+              </div>
+              <div class="gn-app-body">
+                <div class="gn-ui-card">
+                  <div class="gn-settings-row">
+                    <div>
+                      <div class="gn-setting-name">Track Phases</div>
+                      <div class="gn-setting-desc">Track Phase 10 / Sequence progress</div>
+                    </div>
+                    <div class="gn-ios-switch gn-switch-on"></div>
+                  </div>
+                  <div class="gn-settings-row">
+                    <div>
+                      <div class="gn-setting-name">Stop Score</div>
+                      <div class="gn-setting-desc">End game at target total</div>
+                    </div>
+                    <div class="gn-ios-switch gn-switch-on"></div>
+                  </div>
+                  <div class="gn-settings-row">
+                    <span>Target Score</span>
+                    <span class="gn-accent-color">150</span>
+                  </div>
+                  <div class="gn-settings-row">
+                    <span>Winner Criteria</span>
+                    <span class="gn-accent-color">Lowest Score Wins</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="gn-step-text">
+          <span class="gn-step-num">3</span>
+          <h3>Enter scores round by round</h3>
+          <p>
+            Tap player rows to quickly key in scores at the end of each round. Ranks, totals, and logs recalculate instantly.
+          </p>
+        </div>
+        <div class="gn-step-image">
+          <!-- Mini CSS Phone: Enter Scores -->
+          <div class="gn-phone-sm">
+            <div class="gn-phone-screen">
+              <div class="gn-app-nav-sm">
+                <span class="gn-nav-title">Round 6 Scores</span>
+              </div>
+              <div class="gn-app-body">
+                <div class="gn-ui-card gn-input-card">
+                  <div class="gn-input-row">
+                    <span class="gn-input-name">Alice</span>
+                    <span class="gn-input-box gn-active-input">+15</span>
+                  </div>
+                  <div class="gn-input-row">
+                    <span class="gn-input-name">Charlie</span>
+                    <span class="gn-input-box">+5</span>
+                  </div>
+                  <div class="gn-input-row">
+                    <span class="gn-input-name">Bob</span>
+                    <span class="gn-input-box">+10</span>
+                  </div>
+                  <div class="gn-input-row">
+                    <span class="gn-input-name">Dave</span>
+                    <span class="gn-input-box">+25</span>
+                  </div>
+                </div>
+                <div class="gn-numpad">
+                  <div>1</div><div>2</div><div>3</div>
+                  <div>4</div><div>5</div><div>6</div>
+                  <div>7</div><div>8</div><div>9</div>
+                  <div>-</div><div>0</div><div>⌫</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="gn-section gn-features">
+    <h2 class="gn-section-title">Built for the tabletop</h2>
+    <ul class="gn-feature-grid">
+      <li>
+        <h3>Any number of players</h3>
+        <p>From 2-player showdowns to a packed living room of 12. Add players instantly with custom names.</p>
+      </li>
+      <li>
+        <h3>Phase-based games</h3>
+        <p>Keeps track of phases or stages for games that need it, so you never argue over who is on which level.</p>
+      </li>
+      <li>
+        <h3>Pause &amp; resume</h3>
+        <p>Need to break for dinner or clean up? Active games auto-save to history and can be resumed anytime.</p>
+      </li>
+      <li>
+        <h3>Running round history</h3>
+        <p>Tap a player to inspect their round-by-round logs. Spot errors and easily edit past round scores.</p>
+      </li>
+      <li>
+        <h3>Truly offline</h3>
+        <p>No user accounts, no cloud database sync, and no third-party tracking. All data lives on your device.</p>
+      </li>
+      <li>
+        <h3>Native SwiftUI &amp; SwiftData</h3>
+        <p>Extremely responsive, lightweight, and saves battery. Fully adaptive dark mode and iPad split-screen support.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="gn-section gn-final">
+    <h2 class="gn-section-title">Ditch the pen &amp; paper</h2>
+    <p>
+      Gamenight Scoreboard is in TestFlight beta for iPhone and iPad. Want in, or have
+      questions or feedback? Email
+      <a href="mailto:ben.wyrosdick@gmail.com?subject=Gamenight%20Scoreboard">
+        ben.wyrosdick@gmail.com
+      </a>.
+    </p>
+    <a
+      class="gn-cta gn-final-cta"
+      href="mailto:ben.wyrosdick@gmail.com?subject=Gamenight%20TestFlight%20access&body=I'd%20like%20to%20join%20the%20Gamenight%20Scoreboard%20TestFlight%20beta."
+    >
+      Request TestFlight access
+    </a>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  $gn-bg-1: #090714;
+  $gn-bg-2: #16122b;
+  $gn-surface: #201a3c;
+  $gn-surface-high: #2e2652;
+  $gn-accent: #ffc24a;
+  $gn-accent-dark: #cca13e;
+  $gn-text: #ecedf6;
+  $gn-muted: #9aa1c4;
+  $gn-card-border: rgba(255, 255, 255, 0.08);
+
+  :global(body) {
+    background: $gn-bg-1;
+  }
+
+  .gn-hero {
+    position: relative;
+    overflow: hidden;
+    color: $gn-text;
+    padding: 96px 24px 80px;
+
+    @media (max-width: 720px) {
+      padding: 80px 20px 56px;
+    }
+  }
+
+  .gn-hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 0%, rgba(255, 194, 74, 0.2), transparent 55%),
+      radial-gradient(circle at 90% 100%, rgba(100, 70, 220, 0.35), transparent 60%),
+      linear-gradient(160deg, $gn-bg-1, $gn-bg-2 70%);
+    z-index: 0;
+  }
+
+  .gn-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 48px;
+    align-items: center;
+
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+
+  .gn-app-icon {
+    width: 96px;
+    height: 96px;
+    border-radius: 22px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+    margin-bottom: 28px;
+  }
+
+  .gn-hero-copy {
+    h1 {
+      margin: 0 0 16px;
+      font-size: 64px;
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      color: #fff;
+
+      @media (max-width: 720px) {
+        font-size: 48px;
+      }
+    }
+
+    .gn-tagline {
+      margin: 0 0 18px;
+      font-size: 22px;
+      line-height: 1.35;
+      color: $gn-text;
+      font-weight: 500;
+    }
+
+    .gn-sub {
+      margin: 0 0 32px;
+      font-size: 17px;
+      line-height: 1.55;
+      color: $gn-muted;
+      max-width: 30em;
+    }
+
+    @media (max-width: 900px) {
+      .gn-sub {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+
+  .gn-cta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+
+    @media (max-width: 900px) {
+      justify-content: center;
+    }
+  }
+
+  .gn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, $gn-accent, $gn-accent-dark);
+    color: #1a0f02;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    box-shadow: 0 10px 24px rgba(255, 194, 74, 0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 30px rgba(255, 194, 74, 0.5);
+    }
+  }
+
+  .gn-final-cta {
+    margin-top: 28px;
+  }
+
+  .gn-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: $gn-muted;
+    font-size: 14px;
+    margin-bottom: 22px;
+
+    @media (max-width: 900px) {
+      justify-content: center;
+    }
+  }
+
+  .gn-links {
+    display: flex;
+    gap: 10px;
+    color: $gn-muted;
+    font-size: 14px;
+
+    a {
+      color: $gn-text;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        border-bottom-color: $gn-accent;
+      }
+    }
+
+    @media (max-width: 900px) {
+      justify-content: center;
+    }
+  }
+
+  .gn-hero-image {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* IOS Phone UI Mockups */
+  .gn-phone-wrapper {
+    perspective: 1200px;
+  }
+
+  .gn-phone {
+    width: 320px;
+    height: 640px;
+    border-radius: 40px;
+    background: #000;
+    padding: 12px;
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, 0.65),
+      0 0 0 1px rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .gn-phone-screen {
+    flex: 1;
+    background: #0d0a1b;
+    border-radius: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .gn-phone-header {
+    height: 38px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #fff;
+    font-weight: 600;
+    z-index: 10;
+  }
+
+  .gn-dynamic-island {
+    width: 90px;
+    height: 22px;
+    background: #000;
+    border-radius: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 8px;
+  }
+
+  .gn-status-icons {
+    display: flex;
+    gap: 4px;
+    font-size: 10px;
+  }
+
+  .gn-app-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+  }
+
+  .gn-nav-btn {
+    font-size: 14px;
+    color: #8fa0b6;
+    cursor: pointer;
+  }
+
+  .gn-accent-color {
+    color: $gn-accent !important;
+  }
+
+  .gn-nav-title {
+    font-weight: 700;
+  }
+
+  .gn-app-body {
+    flex: 1;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+  }
+
+  .gn-ui-card {
+    background: $gn-surface;
+    border: 1px solid $gn-card-border;
+    border-radius: 16px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .gn-timer-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-left: 4px solid $gn-accent;
+  }
+
+  .gn-timer-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .gn-card-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: $gn-muted;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .gn-timer-val {
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    font-feature-settings: "tnum";
+    letter-spacing: -0.02em;
+  }
+
+  .gn-timer-ring {
+    width: 44px;
+    height: 44px;
+  }
+
+  .gn-ring-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .gn-ring-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.08);
+    stroke-width: 3.5;
+  }
+
+  .gn-ring-fg {
+    fill: none;
+    stroke: $gn-accent;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    animation: gn-pulse 2s infinite ease-in-out;
+  }
+
+  @keyframes gn-pulse {
+    0% { opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { opacity: 0.8; }
+  }
+
+  .gn-scoreboard-list {
+    display: flex;
+    flex-direction: column;
+    background: $gn-surface;
+    border: 1px solid $gn-card-border;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .gn-list-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 16px;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: $gn-muted;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .gn-score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    transition: background 0.15s ease;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+  }
+
+  .gn-player-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .gn-rank-badge {
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.06);
+    color: $gn-muted;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gn-rank-1 .gn-rank-badge {
+    background: rgba(255, 194, 74, 0.15);
+    color: $gn-accent;
+  }
+
+  .gn-player-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .gn-player-sub {
+    font-size: 11px;
+    color: $gn-muted;
+  }
+
+  .gn-player-score {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .gn-rank-1 .gn-player-score {
+    color: $gn-accent;
+  }
+
+  .gn-app-btn {
+    width: 100%;
+    background: $gn-accent;
+    color: #1a0f02;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 194, 74, 0.2);
+    margin-top: auto;
+  }
+
+  /* Mini phone sections */
+  .gn-phone-sm {
+    width: 220px;
+    height: 380px;
+    border-radius: 28px;
+    background: #000;
+    padding: 8px;
+    box-shadow:
+      0 15px 30px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .gn-phone-sm .gn-phone-screen {
+    border-radius: 20px;
+  }
+
+  .gn-app-nav-sm {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    color: #fff;
+  }
+
+  .gn-phone-sm .gn-app-body {
+    padding: 10px;
+    gap: 10px;
+    font-size: 13px;
+  }
+
+  .gn-phone-sm .gn-ui-card {
+    padding: 10px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+
+  /* Settings controls */
+  .gn-settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: 12px;
+  }
+
+  .gn-setting-name {
+    font-weight: 600;
+  }
+
+  .gn-setting-desc {
+    font-size: 9px;
+    color: $gn-muted;
+  }
+
+  .gn-ios-switch {
+    width: 32px;
+    height: 18px;
+    border-radius: 99px;
+    background: rgba(255, 255, 255, 0.15);
+    position: relative;
+  }
+
+  .gn-switch-on {
+    background: #34c759;
+    &::after {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 99px;
+      background: #fff;
+      top: 2px;
+      right: 2px;
+    }
+  }
+
+  .gn-settings-slider-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .gn-slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    font-weight: 600;
+  }
+
+  .gn-ios-slider {
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .gn-slider-fill {
+    height: 100%;
+    background: $gn-accent;
+    border-radius: 2px;
+  }
+
+  .gn-slider-thumb {
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 99px;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Score inputs */
+  .gn-input-card {
+    gap: 8px !important;
+  }
+
+  .gn-input-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: 11px;
+  }
+
+  .gn-input-name {
+    font-weight: 600;
+  }
+
+  .gn-input-box {
+    background: $gn-surface-high;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    width: 44px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: $gn-muted;
+  }
+
+  .gn-active-input {
+    border-color: $gn-accent;
+    color: $gn-accent;
+    background: rgba(255, 194, 74, 0.05);
+  }
+
+  .gn-numpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    padding-top: 6px;
+
+    div {
+      padding: 6px 0;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 4px;
+      cursor: pointer;
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+
+  /* Sections general styling */
+  .gn-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 24px;
+    color: $gn-text;
+
+    @media (max-width: 720px) {
+      padding: 64px 20px;
+    }
+  }
+
+  .gn-section-title {
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+    margin: 0 0 48px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .gn-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+
+    li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: center;
+
+      @media (max-width: 720px) {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        text-align: center;
+      }
+    }
+
+    li:nth-child(even) {
+      .gn-step-image { order: -1; }
+      @media (max-width: 720px) {
+        .gn-step-image { order: 0; }
+      }
+    }
+  }
+
+  .gn-step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: rgba(255, 194, 74, 0.15);
+    color: $gn-accent;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 14px;
+  }
+
+  .gn-step-text {
+    h3 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      line-height: 1.2;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.55;
+      color: $gn-muted;
+      max-width: 28em;
+    }
+
+    @media (max-width: 720px) {
+      p { margin-left: auto; margin-right: auto; }
+    }
+  }
+
+  .gn-step-image {
+    display: flex;
+    justify-content: center;
+  }
+
+  .gn-features {
+    border-top: 1px solid $gn-card-border;
+    border-bottom: 1px solid $gn-card-border;
+  }
+
+  .gn-feature-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+
+    @media (max-width: 900px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media (max-width: 560px) {
+      grid-template-columns: 1fr;
+    }
+
+    li {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid $gn-card-border;
+      border-radius: 18px;
+      padding: 26px 24px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.55;
+      color: $gn-muted;
+    }
+  }
+
+  .gn-final {
+    text-align: center;
+
+    p {
+      margin: 0 auto;
+      max-width: 36em;
+      font-size: 17px;
+      line-height: 1.55;
+      color: $gn-muted;
+    }
+
+    p a {
+      color: $gn-accent;
+      text-decoration: underline;
+    }
+  }
+
+  :global(.site-footer) {
+    color: rgba(255, 255, 255, 0.5);
+    a { color: rgba(255, 255, 255, 0.75); }
+    a:hover { color: #fff; }
+  }
+</style>
