@@ -11,7 +11,8 @@ interface AppEntry {
   name: string;
   tagline: string;
   description: string;
-  icon: ImageMetadata;
+  /** App-store style icon. Omit for CLI/TUI tools to render a terminal glyph. */
+  icon?: ImageMetadata;
   accent: string;
   status: string;
   /** Where the main card links. Defaults to the internal product page. */
@@ -89,6 +90,88 @@ const sections: AppSection[] = [
           { label: 'Source', href: 'https://github.com/benwyrosdick/dockit' },
         ],
       },
+      {
+        slug: 'openusage-waybar',
+        name: 'OpenUsage Waybar',
+        tagline: 'AI usage in your status bar',
+        description:
+          'A Waybar module that tracks AI coding subscription usage — Claude, Copilot, Cursor — right from your desktop. Live progress bars and tooltips so you can watch quotas and credits at a glance.',
+        accent: '#89b4fa',
+        status: 'Open source · Linux/Wayland',
+        href: 'https://github.com/benwyrosdick/openusage-waybar',
+        external: true,
+        cta: 'View on GitHub',
+        links: [
+          { label: 'Source', href: 'https://github.com/benwyrosdick/openusage-waybar' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'cli',
+    title: 'CLI / TUI',
+    blurb: 'Terminal tools for the keyboard-driven. Free and open source.',
+    apps: [
+      {
+        slug: 'lazylinear',
+        name: 'LazyLinear',
+        tagline: 'Linear issues in the terminal',
+        description:
+          'A lazygit-style TUI for Linear. Browse, create, edit, and manage issues without leaving the terminal — with multi-team workflows, status filtering, and one-key copy of URLs and branch names.',
+        accent: '#5e6ad2',
+        status: 'Open source · Go',
+        href: 'https://github.com/benwyrosdick/lazylinear',
+        external: true,
+        cta: 'View on GitHub',
+        links: [
+          { label: 'Source', href: 'https://github.com/benwyrosdick/lazylinear' },
+        ],
+      },
+      {
+        slug: 'restui',
+        name: 'restui',
+        tagline: 'Postman in your terminal',
+        description:
+          'A terminal API client built with Rust and Ratatui. Fire HTTP requests, organize collections, manage environment variables and auth, and read responses with syntax highlighting and jq filtering.',
+        accent: '#e06c75',
+        status: 'Open source · Rust',
+        href: 'https://github.com/benwyrosdick/restui',
+        external: true,
+        cta: 'View on GitHub',
+        links: [
+          { label: 'Source', href: 'https://github.com/benwyrosdick/restui' },
+        ],
+      },
+      {
+        slug: 'wxman',
+        name: 'wxman',
+        tagline: 'Weather in your terminal',
+        description:
+          'A weather TUI built with Rust and Ratatui. Current conditions, hourly and 5-day forecasts with color-coded temperatures and icons, auto-location via IP, and a refresh every 15 minutes.',
+        accent: '#56b6c2',
+        status: 'Open source · Rust',
+        href: 'https://github.com/benwyrosdick/wxman',
+        external: true,
+        cta: 'View on GitHub',
+        links: [
+          { label: 'Source', href: 'https://github.com/benwyrosdick/wxman' },
+        ],
+      },
+      {
+        slug: 'git-recent',
+        name: 'git-recent',
+        tagline: 'Jump to recent branches',
+        description:
+          'A tiny CLI that lists your git branches by most recent activity in an interactive menu. Filter, pick, and check out — no more squinting at branch names you half remember.',
+        accent: '#f0a050',
+        status: 'Open source · Go',
+        href: 'https://github.com/benwyrosdick/git-recent',
+        external: true,
+        cta: 'View on GitHub',
+        links: [
+          { label: 'Source', href: 'https://github.com/benwyrosdick/git-recent' },
+        ],
+      },
     ],
   },
 ];
@@ -96,7 +179,7 @@ const sections: AppSection[] = [
 
 <BaseLayout
   title="Apps – Ben Wyrosdick"
-  description="iOS and desktop apps built by Ben Wyrosdick."
+  description="iOS, desktop, and command-line apps built by Ben Wyrosdick."
 >
   <section class="apps-hero">
     <div class="apps-hero-bg" aria-hidden="true"></div>
@@ -104,8 +187,8 @@ const sections: AppSection[] = [
       <p class="apps-eyebrow">Apps</p>
       <h1>Things I'm making</h1>
       <p class="apps-lead">
-        A small collection of iOS and desktop apps I build in evenings and weekends. All local,
-        no accounts, no tracking.
+        A small collection of iOS, desktop, and command-line apps I build in evenings and
+        weekends. Mostly local, mostly open source, no tracking.
       </p>
     </div>
   </section>
@@ -134,13 +217,19 @@ const sections: AppSection[] = [
                 rel={external ? 'noopener noreferrer' : undefined}
               >
                 <div class="app-card-head">
-                  <Image
-                    src={app.icon}
-                    alt={`${app.name} app icon`}
-                    widths={[96, 192]}
-                    sizes="96px"
-                    class="app-card-icon"
-                  />
+                  {app.icon ? (
+                    <Image
+                      src={app.icon}
+                      alt={`${app.name} app icon`}
+                      widths={[96, 192]}
+                      sizes="96px"
+                      class="app-card-icon"
+                    />
+                  ) : (
+                    <div class="app-card-icon app-card-icon--cli" aria-hidden="true">
+                      <span>&gt;_</span>
+                    </div>
+                  )}
                   <div class="app-card-id">
                     <h3>{app.name}</h3>
                     <p class="app-card-tagline">{app.tagline}</p>
@@ -326,6 +415,23 @@ const sections: AppSection[] = [
     border-radius: 18px;
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
     flex-shrink: 0;
+  }
+
+  .app-card-icon--cli {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+      linear-gradient(150deg, color-mix(in srgb, var(--app-accent) 26%, #0c1230), #0c1230);
+    border: 1px solid color-mix(in srgb, var(--app-accent) 45%, transparent);
+
+    span {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--app-accent);
+      letter-spacing: -0.02em;
+    }
   }
 
   .app-card-id {
