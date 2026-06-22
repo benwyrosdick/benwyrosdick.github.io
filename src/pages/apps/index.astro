@@ -5,6 +5,7 @@ import imposterIcon from '../../assets/imposter/app-icon.png';
 import batteryscopeIcon from '../../assets/batteryscope/app-icon.png';
 import gamenightIcon from '../../assets/gamenight/app-icon.png';
 import dockitIcon from '../../assets/dockit/app-icon.png';
+import openusageIcon from '../../assets/openusage-waybar/app-icon.png';
 
 interface AppEntry {
   slug: string;
@@ -96,7 +97,8 @@ const sections: AppSection[] = [
         tagline: 'AI usage in your status bar',
         description:
           'A Waybar module that tracks AI coding subscription usage — Claude, Copilot, Cursor — right from your desktop. Live progress bars and tooltips so you can watch quotas and credits at a glance.',
-        accent: '#89b4fa',
+        icon: openusageIcon,
+        accent: '#aee23a',
         status: 'Open source · Linux/Wayland',
         href: 'https://github.com/benwyrosdick/openusage-waybar',
         external: true,
